@@ -1,0 +1,7 @@
+thomas_platform_homepage:
+    path:     /
+    defaults: { _controller: ThomasPlatformBundle:Default:index }
+
+hello_the_world:
+    path:     /hello-world
+    defaults: { _controller: ThomasPlatformBundle:Advert:index }
