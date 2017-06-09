@@ -1,7 +1,44 @@
-thomas_platform_homepage:
-    path:     /
-    defaults: { _controller: ThomasPlatformBundle:Default:index }
+thomas_platform_home:
+    path:      /{page}
+    defaults: 
+        _controller: ThomasPlatformBundle:Advert:index
+        page:        1
+    requirements:
+        page: \d*
 
-hello_the_world:
-    path:     /hello-world
-    defaults: { _controller: ThomasPlatformBundle:Advert:index }
+thomas_platform_view:
+    path:      /advert/{id}
+    defaults:
+        _controller: ThomasPlatformBundle:Advert:view
+    requirements:
+        id: \d+
+    
+thomas_platform_add:
+    path:      /add
+    defaults: 
+        _controller: ThomasPlatformBundle:Advert:add
+
+
+thomas_platform_edit:
+    path:      /edit/{id}
+    defaults:
+        _controller: ThomasPlatformBundle:Advert:edit
+    requirements:
+        id: \d+
+
+thomas_platform_delete:
+    path:      /delete/{id}
+    defaults:
+        _controller: ThomasPlatformBundle:Advert:delete
+    requirements:
+        id: \d+
+
+
+# oc_platform_view_slug:
+#     path:      /platform/{year}/{slug}.{format}
+#     defaults:
+#         _controller: ThomasPlatformBundle:Advert:viewSlug
+#         format:      html
+#     requirements:
+#         year:   \d{4}
+#         format: html|xml
