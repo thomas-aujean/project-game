@@ -33,7 +33,9 @@
         <h3>Les annonces</h3>
         <ul class="nav nav-pills nav-stacked">
           <li><a href="{{ path('thomas_platform_home') }}">Accueil</a></li>
-          <li><a href="{{ path('thomas_platform_add') }}">Ajouter une annonce</a></li>
+          {% if is_granted('ROLE_USER') %}
+            <li><a href="{{ path('thomas_platform_add') }}">Ajouter une annonce</a></li>
+          {% endif %}
         </ul>
 
         <h4>Dernières annonces</h4>
@@ -48,7 +50,7 @@
     <hr>
 
     <footer>
-      <p>The sky's the limit © {{ 'now'|date('Y') }} and beyond.</p>
+      <p>Thomas AUJEAN © {{ 'now'|date('Y') }}</p>
     </footer>
   </div>
 

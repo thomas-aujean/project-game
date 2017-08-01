@@ -15,6 +15,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Thomas\PlatformBundle\Form\AdvertType;
 use Thomas\PlatformBundle\Form\AdvertEditType;
 
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+//  ce use pour l'annotation security
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 class AdvertController extends Controller
 {
@@ -95,9 +99,21 @@ class AdvertController extends Controller
 
 
 
-
+   /**
+   * @Security("has_role('ROLE_USER')")
+   */
   public function addAction(Request $request)
   {
+
+
+    //  On vérifie que l'utilisateur dispose bien du rôle ROLE_USER
+    // maintenant fait avec annotation
+    // if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+    //   // Sinon on déclenche une exception « Accès interdit »
+    //   throw new AccessDeniedException('Accès limité aux auteurs.');
+    // }
+
+
     // On crée un objet Advert
     $advert = new Advert();
 
