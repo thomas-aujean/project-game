@@ -1,0 +1,11 @@
+# src/OC/CoreBundle/Resources/config/routing.yml
+
+thomas_core_home:
+    path: /
+    defaults:
+        _controller: ThomasCoreBundle:Core:index
+
+thomas_core_contact:
+    path: /contact
+    defaults:
+        _controller: ThomasCoreBundle:Core:contact

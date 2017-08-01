@@ -13,3 +13,9 @@ services:
       - "@thomas_platform.email.application_mailer"
     tags:
       - { name: doctrine.event_listener, event: postPersist }
+
+  thomas_platform.validator.antiflood:                              # Le nom du service
+      class: Thomas\PlatformBundle\Validator\AntifloodValidator     # La classe du service, ici notre validateur déjà créé
+      arguments: ["@request_stack", "@doctrine.orm.entity_manager"] # Les données qu'on injecte au service : la requête et l'EntityManager
+      tags:
+          - { name: validator.constraint_validator, alias: thomas_platform_antiflood }  # C'est avec l'alias qu'on retrouvera le service

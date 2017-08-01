@@ -33,4 +33,11 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
         ;
     }
 
+    public function isFlood($ip, $sec)
+    {
+        
+        // Enfin, on retourne le résultat
+        return false ;
+    }
+
 }

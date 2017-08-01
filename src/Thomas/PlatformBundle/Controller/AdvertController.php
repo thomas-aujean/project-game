@@ -12,6 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Thomas\PlatformBundle\Form\AdvertType;
+use Thomas\PlatformBundle\Form\AdvertEditType;
+
 
 class AdvertController extends Controller
 {
@@ -50,12 +53,17 @@ class AdvertController extends Controller
     ));
   }
 
+
+
+
+
   public function viewAction($id)
   {
     $em = $this->getDoctrine()->getManager();
 
     // On récupère l'annonce $id
     $advert = $em->getRepository('ThomasPlatformBundle:Advert')->find($id);
+
 
     // $advert est donc une instance de Thomas\PlatformBundle\Entity\Advert
     // ou null si l'id $id  n'existe pas, d'où ce if :
@@ -84,21 +92,72 @@ class AdvertController extends Controller
 
   }
 
+
+
+
+
   public function addAction(Request $request)
   {
+    // On crée un objet Advert
+    $advert = new Advert();
 
-    $em = $this->getDoctrine()->getManager();
+    // Ici, on préremplit avec la date d'aujourd'hui, par exemple
+    // Cette date sera donc préaffichée dans le formulaire, cela facilite le travail de l'utilisateur
+    // $advert->setDate(new \Datetime());
 
-    // On ne sait toujours pas gérer le formulaire, patience cela vient dans la prochaine partie !
+    // On crée le FormBuilder grâce au service form factory
+    $form = $this->get('form.factory')->create(AdvertType::class, $advert);
+    // ou
+    // $form = $this->createForm(AdvertType::class, $advert)
 
-    if ($request->isMethod('POST')) {
-      $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+    // On ajoute les champs de l'entité que l'on veut à notre formulaire
+    // $formBuilder
+    //   ->add('date',      DateType::class)
+    //   ->add('title',     TextType::class)
+    //   ->add('content',   TextareaType::class)
+    //   ->add('author',    TextType::class)
+    //   ->add('published', CheckboxType::class, array('required' => false))
+    //   ->add('save',      SubmitType::class)
+    // ;
+    // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
 
-      return $this->redirectToRoute('thomas_platform_view', array('id' => $advert->getId()));
+    // À partir du formBuilder, on génère le formulaire
+    // $form = $formBuilder->getForm();
+
+    // Si la requête est en POST
+    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+
+      // On fait le lien Requête <-> Formulaire
+      // À partir de maintenant, la variable $advert contient les valeurs entrées dans le formulaire par le visiteur
+      // $form->handleRequest($request);
+
+      // On vérifie que les valeurs entrées sont correctes
+      // (Nous verrons la validation des objets en détail dans le prochain chapitre)
+      // if ($form->isValid()) {
+        // On enregistre notre objet $advert dans la base de données, par exemple
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($advert);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+
+        // On redirige vers la page de visualisation de l'annonce nouvellement créée
+        return $this->redirectToRoute('thomas_platform_view', array('id' => $advert->getId()));
+      // }
     }
 
-    return $this->render('ThomasPlatformBundle:Advert:add.html.twig');
+    // À ce stade, le formulaire n'est pas valide car :
+    // - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire
+    // - Soit la requête est de type POST, mais le formulaire contient des valeurs invalides, donc on l'affiche de nouveau
+    return $this->render('ThomasPlatformBundle:Advert:add.html.twig', array(
+      'form' => $form->createView(),
+    ));
   }
+
+
+
+
 
   public function editAction($id, Request $request)
   {
@@ -111,41 +170,55 @@ class AdvertController extends Controller
     }
 
     // Ici encore, il faudra mettre la gestion du formulaire
+    $form = $this->get('form.factory')->create(AdvertEditType::class, $advert);
 
-    if ($request->isMethod('POST')) {
+    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($advert);
+      $em->flush();
       $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
 
       return $this->redirectToRoute('thomas_platform_view', array('id' => $advert->getId()));
     }
 
     return $this->render('ThomasPlatformBundle:Advert:edit.html.twig', array(
-      'advert' => $advert
+      'form' => $form->createView(),'advert' => $advert
     ));
   }
 
-  public function deleteAction($id)
-  {
-     $em = $this->getDoctrine()->getManager();
 
-    // On récupère l'annonce $id
+
+
+
+
+  public function deleteAction(Request $request, $id)
+  {
+    $em = $this->getDoctrine()->getManager();
+
     $advert = $em->getRepository('ThomasPlatformBundle:Advert')->find($id);
 
     if (null === $advert) {
       throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
     }
 
-    // On boucle sur les catégories de l'annonce pour les supprimer
-    foreach ($advert->getCategories() as $category) {
-      $advert->removeCategory($category);
+    // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+    // Cela permet de protéger la suppression d'annonce contre cette faille
+    $form = $this->get('form.factory')->create();
+
+    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+      $em->remove($advert);
+      $em->flush();
+
+      $request->getSession()->getFlashBag()->add('info', "L'annonce a bien été supprimée.");
+
+      return $this->redirectToRoute('thomas_platform_home');
     }
-
-    // Pour persister le changement dans la relation, il faut persister l'entité propriétaire
-    // Ici, Advert est le propriétaire, donc inutile de la persister car on l'a récupérée depuis Doctrine
-
-    // On déclenche la modification
-    $em->flush();
-
-    return $this->render('ThomasPlatformBundle:Advert:delete.html.twig');
+    
+    return $this->render('ThomasPlatformBundle:Advert:delete.html.twig', array(
+      'advert' => $advert,
+      'form'   => $form->createView(),
+    ));
   }
 
   public function menuAction($limit)
