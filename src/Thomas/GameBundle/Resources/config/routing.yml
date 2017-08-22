@@ -1,0 +1,10 @@
+thomas_game_home:
+    path:     /
+    defaults: { _controller: ThomasGameBundle:Product:index }
+
+thomas_game_view:
+    path:      /product/{id}
+    defaults:
+        _controller: ThomasGameBundle:Product:view
+    requirements:
+        id: \d+

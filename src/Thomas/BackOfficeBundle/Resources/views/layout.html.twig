@@ -17,15 +17,8 @@
   <body>
   <div class="container">
     <div id="header" class="jumbotron">
-      <h1>Project Games</h1>
-      <p>
-        Retrouvez vos anciennes consoles et vieux jeux vidéos et retrouver des sensations perdues
-      </p>
-      <p>
-        <a class="btn btn-primary btn-lg" href="https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2">
-          Participer au MOOC »
-        </a>
-      </p>
+      <h1>Project Games - Back Office</h1>
+
     </div>
 
     <div class="row">
@@ -40,29 +33,21 @@
     <a href="{{ path('fos_user_security_login') }}">Connexion</a>
 {% endif %}
 
-        <h3>Les jeux video</h3>
+        <h3>Gestion du site</h3>
         <ul class="nav nav-pills nav-stacked">
-          <li><a href="{{ path('thomas_game_home') }}">Accueil</a></li>
-        
-        </ul>
-        <h3>Les annonces</h3>
-        <ul class="nav nav-pills nav-stacked">
-          <li><a href="{{ path('thomas_platform_home') }}">Accueil</a></li>
-          {% if is_granted('ROLE_USER') %}
-            <li><a href="{{ path('thomas_platform_add') }}">Ajouter une annonce</a></li>
-          {% endif %}
-          
-        </ul>
-
-        <h4>Dernières annonces</h4>
-        {{ render(controller("ThomasPlatformBundle:Advert:menu", {'limit': 3})) }}
-        <hr>
           {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('thomas_back_office_homepage') }}">Back Office</a>
+            <li><a href="{{ path('thomas_back_office_product_index') }}">Les produits</a></li>
+            <li><a href="{{ path('thomas_back_office_users') }}">Les utilisateurs</a></li>
+            <li><a href="{{ path('thomas_back_office_orders') }}">Les commandes</a></li>
           {% endif %}
+          <hr>
+          <li><a href="{{ path('thomas_platform_home') }}">Retour au site</a></li>
+        </ul>
       </div>
       <div id="content" class="col-md-9">
         {% block body %}
+          {% block thomasbo_body %}
+          {% endblock %}
         {% endblock %}
       </div>
     </div>

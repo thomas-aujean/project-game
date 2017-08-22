@@ -1,0 +1,22 @@
+thomas_back_office_homepage:
+    path:     /
+    defaults: { _controller: ThomasBackOfficeBundle:Default:index }
+
+
+
+thomas_back_office_product_index:
+    path:     products
+    defaults: { _controller: ThomasBackOfficeBundle:Product:index }
+
+thomas_back_office_product_view:
+    path:     /product/{id}
+    defaults: { _controller: ThomasBackOfficeBundle:Product:view }
+
+
+thomas_back_office_users:
+    path:     users
+    defaults: { _controller: ThomasBackOfficeBundle:User:index }
+
+thomas_back_office_orders:
+    path:     orders
+    defaults: { _controller: ThomasBackOfficeBundle:Order:index }

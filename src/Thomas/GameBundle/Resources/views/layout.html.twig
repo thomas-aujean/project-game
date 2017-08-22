@@ -1,0 +1,16 @@
+{# src/Thomas/PlatformBundle/Resources/views/layout.html.twig #}
+
+{% extends "ThomasCoreBundle::layout.html.twig" %}
+
+{% block title %}
+  Les produits - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+<h1>Mon titre commun</h1>
+
+  {% block thomasgame_body %}
+  {% endblock %}
+
+{% endblock %}
