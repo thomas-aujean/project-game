@@ -1,7 +1,7 @@
 {% extends "ThomasBackOfficeBundle::layout.html.twig" %}
 
 {% block title %}
-  La base dthdth- {{ parent() }}
+  Back Office- {{ parent() }}
 {% endblock %}
 
 
@@ -24,15 +24,33 @@
           {{ product.name }}
         </a>
       </td> 
-      <td>{{ product.categoryId }}</td>
-      <td>{{ product.brandId }}</td>
+      <td>
+      {% if product.productCategory is not null %}
+        {{ product.productCategory.name }}
+      {% endif %}
+      </td>
+      <td>
+      {% if product.brand is not null %}
+        {{ product.brand.name }}
+      {% endif %}
+      </td>
       <td>{{ product.price }}</td>
-      <td>{{ product.systemId }}</td>
+      <td>
+      {% if product.system is not null %}
+        {{ product.system.name }}
+      {% endif %}
+      </td>
     </tr>
   {% endfor %}
   
 </table>
 
 
-
+<p>
+  <a href="{{ path('thomas_back_office_product_add') }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Ajouter un produit
+  </a>
+  
+</p>
 {% endblock %}

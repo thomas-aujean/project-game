@@ -12,6 +12,18 @@ thomas_back_office_product_view:
     path:     /product/{id}
     defaults: { _controller: ThomasBackOfficeBundle:Product:view }
 
+thomas_back_office_product_edit:
+    path:     /product-edit/{id}
+    defaults: { _controller: ThomasBackOfficeBundle:Product:edit }
+
+thomas_back_office_product_add:
+    path:     /product-add
+    defaults: { _controller: ThomasBackOfficeBundle:Product:add }
+
+thomas_back_office_product_delete:
+    path:     /product-delete/{id}
+    defaults: { _controller: ThomasBackOfficeBundle:Product:delete }
+
 
 thomas_back_office_users:
     path:     users

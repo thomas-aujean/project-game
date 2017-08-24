@@ -2,7 +2,11 @@
 
 namespace Thomas\BackOfficeBundle\Controller;
 
+use Thomas\CoreBundle\Entity\Product;
+use Thomas\CoreBundle\Form\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class ProductController extends Controller
 {
@@ -41,16 +45,28 @@ class ProductController extends Controller
     }
 
 
-   /**
-   * @Security("has_role('ROLE_USER')")
-   */
+
   public function addAction(Request $request)
   {
-
     $product = new Product();
 
+    $form   = $this->get('form.factory')->create(ProductType::class, $product);
     
-    return $this->render('ThomasPlatformBundle:Advert:add.html.twig', array(
+    if ($request->isMethod('POST')) {
+      $form->handleRequest($request);
+      if ($form->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($product);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('notice', 'Produit bien enregistré.');
+
+        return $this->redirectToRoute('thomas_back_office_product_view', array('id' => $product->getId()));
+      }
+    }
+
+
+    return $this->render('ThomasBackOfficeBundle:Product:add.html.twig', array(
       'form' => $form->createView(),
     ));
   }

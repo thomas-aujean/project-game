@@ -1,12 +1,33 @@
 {% extends "ThomasBackOfficeBundle::layout.html.twig" %}
 
 {% block title %}
-  La base dthdth- {{ parent() }}
+  Back Office - {{ parent() }}
 {% endblock %}
 
 
-{% block thomasbo_body %}
-<h1>Product view</h1>
 
-Le produit  {{ product.name }} vaut {{ product.price }} €.
+{% block thomasbo_body %}
+
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    {{ flashMessage }}
+{% endfor %}
+
+<h1>{{ product.name }} - {{ product.reference }}</h1>
+
+<div>{{ product.price }} €</div>
+
+<p>
+  <a href="{{ path('thomas_back_office_product_index') }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Retour à la liste
+  </a>
+  <a href="{{ path('thomas_back_office_product_edit', {'id': product.id}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-edit"></i>
+    Modifier le produit
+  </a>
+  <a href="{{ path('thomas_back_office_product_delete', {'id': product.id}) }}" class="btn btn-danger">
+    <i class="glyphicon glyphicon-trash"></i>
+    Supprimer le produit
+  </a>
+</p>
 {% endblock %}

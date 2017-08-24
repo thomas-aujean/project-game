@@ -12,11 +12,32 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Product
 {
+
     /**
-    * @ORM\OneToOne(targetEntity="Thomas\CoreBundle\Entity\ProductImage", cascade={"persist"})* @ORM\JoinColumn(nullable=false)
-    * @ORM\JoinColumn(nullable=false)
+    * @ORM\OneToOne(targetEntity="Thomas\CoreBundle\Entity\ProductImage", cascade={"persist"})
     */
-    private $image;
+    private $productImage;
+
+    /**
+    * @ORM\OneToOne(targetEntity="Thomas\CoreBundle\Entity\Brand")
+    */
+    private $brand;
+
+    /**
+    * @ORM\OneToOne(targetEntity="Thomas\CoreBundle\Entity\Editor")
+    */
+    private $editor;
+
+    /**
+    * @ORM\OneToOne(targetEntity="Thomas\CoreBundle\Entity\ProductCategory")
+    */
+    private $productCategory;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="Thomas\CoreBundle\Entity\System", inversedBy="products")
+    * @ORM\JoinColumn(name="product_category_id", referencedColumnName="id")
+    */
+    private $system;
 
     /**
      * @var int
@@ -41,19 +62,9 @@ class Product
      */
     private $name;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="categoryId", type="integer")
-     */
-    private $categoryId;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="brandId", type="integer")
-     */
-    private $brandId;
+
+
 
     /**
      * @var string
@@ -65,23 +76,13 @@ class Product
     /**
      * @var int
      *
-     * @ORM\Column(name="rates", type="integer")
+     * @ORM\Column(name="rates", type="integer", nullable=true)
      */
     private $rates;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="editorId", type="integer")
-     */
-    private $editorId;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="systemId", type="integer", nullable=true)
-     */
-    private $systemId;
+
+
 
 
     /**
@@ -142,53 +143,9 @@ class Product
         return $this->name;
     }
 
-    /**
-     * Set categoryId
-     *
-     * @param integer $categoryId
-     *
-     * @return Product
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->categoryId = $categoryId;
 
-        return $this;
-    }
 
-    /**
-     * Get categoryId
-     *
-     * @return int
-     */
-    public function getCategoryId()
-    {
-        return $this->categoryId;
-    }
 
-    /**
-     * Set brandId
-     *
-     * @param integer $brandId
-     *
-     * @return Product
-     */
-    public function setBrandId($brandId)
-    {
-        $this->brandId = $brandId;
-
-        return $this;
-    }
-
-    /**
-     * Get brandId
-     *
-     * @return int
-     */
-    public function getBrandId()
-    {
-        return $this->brandId;
-    }
 
     /**
      * Set price
@@ -238,6 +195,58 @@ class Product
         return $this->rates;
     }
 
+    
+
+
+
+    /**
+     * Set categoryId
+     *
+     * @param integer $categoryId
+     *
+     * @return Product
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->categoryId = $categoryId;
+
+        return $this;
+    }
+
+    /**
+     * Get categoryId
+     *
+     * @return integer
+     */
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
+
+    /**
+     * Set brandId
+     *
+     * @param integer $brandId
+     *
+     * @return Product
+     */
+    public function setBrandId($brandId)
+    {
+        $this->brandId = $brandId;
+
+        return $this;
+    }
+
+    /**
+     * Get brandId
+     *
+     * @return integer
+     */
+    public function getBrandId()
+    {
+        return $this->brandId;
+    }
+
     /**
      * Set editorId
      *
@@ -255,7 +264,7 @@ class Product
     /**
      * Get editorId
      *
-     * @return int
+     * @return integer
      */
     public function getEditorId()
     {
@@ -279,11 +288,130 @@ class Product
     /**
      * Get systemId
      *
-     * @return int
+     * @return integer
      */
     public function getSystemId()
     {
         return $this->systemId;
     }
-}
 
+    /**
+     * Set productImage
+     *
+     * @param \Thomas\CoreBundle\Entity\ProductImage $productImage
+     *
+     * @return Product
+     */
+    public function setProductImage(\Thomas\CoreBundle\Entity\ProductImage $productImage = null)
+    {
+        $this->productImage = $productImage;
+
+        return $this;
+    }
+
+    /**
+     * Get productImage
+     *
+     * @return \Thomas\CoreBundle\Entity\ProductImage
+     */
+    public function getProductImage()
+    {
+        return $this->productImage;
+    }
+
+    /**
+     * Set brand
+     *
+     * @param \Thomas\CoreBundle\Entity\Brand $brand
+     *
+     * @return Product
+     */
+    public function setBrand(\Thomas\CoreBundle\Entity\Brand $brand = null)
+    {
+        $this->brand = $brand;
+
+        return $this;
+    }
+
+    /**
+     * Get brand
+     *
+     * @return \Thomas\CoreBundle\Entity\Brand
+     */
+    public function getBrand()
+    {
+        return $this->brand;
+    }
+
+    /**
+     * Set editor
+     *
+     * @param \Thomas\CoreBundle\Entity\Editor $editor
+     *
+     * @return Product
+     */
+    public function setEditor(\Thomas\CoreBundle\Entity\Editor $editor = null)
+    {
+        $this->editor = $editor;
+
+        return $this;
+    }
+
+    /**
+     * Get editor
+     *
+     * @return \Thomas\CoreBundle\Entity\Editor
+     */
+    public function getEditor()
+    {
+        return $this->editor;
+    }
+
+    /**
+     * Set productCategory
+     *
+     * @param \Thomas\CoreBundle\Entity\ProductCategory $productCategory
+     *
+     * @return Product
+     */
+    public function setProductCategory(\Thomas\CoreBundle\Entity\ProductCategory $productCategory = null)
+    {
+        $this->productCategory = $productCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get productCategory
+     *
+     * @return \Thomas\CoreBundle\Entity\ProductCategory
+     */
+    public function getProductCategory()
+    {
+        return $this->productCategory;
+    }
+
+    /**
+     * Set system
+     *
+     * @param \Thomas\CoreBundle\Entity\System $system
+     *
+     * @return Product
+     */
+    public function setSystem(\Thomas\CoreBundle\Entity\System $system = null)
+    {
+        $this->system = $system;
+
+        return $this;
+    }
+
+    /**
+     * Get system
+     *
+     * @return \Thomas\CoreBundle\Entity\System
+     */
+    public function getSystem()
+    {
+        return $this->system;
+    }
+}
