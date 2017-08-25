@@ -12,6 +12,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Brand
 {
+
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="brand")
+     */
+    private $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
     /**
      * @var int
      *

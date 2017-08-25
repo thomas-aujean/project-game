@@ -7,5 +7,15 @@
 {% block thomasgame_body %}
 <h1>page view</h1>
 
+
+<h1>{{ product.name }}</h1>
+
+<div>{{ product.price }} €</div>
+<div>
+{% if product.productImage is not null %}
+  <img src="{{ asset(product.productImage.webPath) }}" alt="{{ product.productImage.alt }}"/>
+  {% endif %}
+</div>
+
 {% endblock %}
 

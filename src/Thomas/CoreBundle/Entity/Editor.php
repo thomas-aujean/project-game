@@ -12,6 +12,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Editor
 {
+
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="editor")
+     */
+    private $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
     /**
      * @var int
      *

@@ -6,11 +6,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class ProductType extends AbstractType
+class ProductSearchType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -18,9 +17,6 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',       TextType::class)
-            ->add('price',      MoneyType::class)
-            ->add('product_image',      ProductImageType::class) 
             ->add('product_category', EntityType::class, array(
                 'class'        => 'ThomasCoreBundle:ProductCategory',
                 'choice_label' => 'name',
@@ -44,7 +40,7 @@ class ProductType extends AbstractType
                 'multiple'     => false,
                 'required'     => false,
             ))
-            ->add('save',       SubmitType::class);
+            ->add('search',       SubmitType::class);
         ;
     }
     

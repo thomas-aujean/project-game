@@ -1,0 +1,14 @@
+{# src/Thomas/PlatformBundle/Resources/views/Advert/menu.html.twig #}
+
+{# Ce template n'hérite de personne,
+   tout comme le template inclus avec {{ include() }}. #}
+
+<ul class="nav nav-pills nav-stacked">
+  {% for product in listProducts %}
+    <li>
+      <a href="{{ path('thomas_platform_view', {'id': product.id}) }}">
+        {{ product.name }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>

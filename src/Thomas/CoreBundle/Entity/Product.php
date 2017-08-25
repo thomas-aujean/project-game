@@ -14,22 +14,25 @@ class Product
 {
 
     /**
-    * @ORM\OneToOne(targetEntity="Thomas\CoreBundle\Entity\ProductImage", cascade={"persist"})
+    * @ORM\OneToOne(targetEntity="Thomas\CoreBundle\Entity\ProductImage", cascade={"persist", "remove"})
     */
     private $productImage;
 
     /**
-    * @ORM\OneToOne(targetEntity="Thomas\CoreBundle\Entity\Brand")
+    * @ORM\ManyToOne(targetEntity="Thomas\CoreBundle\Entity\Brand", inversedBy="products")
+    * @ORM\JoinColumn(name="brand_id", referencedColumnName="id")
     */
     private $brand;
 
     /**
-    * @ORM\OneToOne(targetEntity="Thomas\CoreBundle\Entity\Editor")
+    * @ORM\ManyToOne(targetEntity="Thomas\CoreBundle\Entity\Editor", inversedBy="products")
+    * @ORM\JoinColumn(name="editor_id", referencedColumnName="id")
     */
     private $editor;
 
     /**
-    * @ORM\OneToOne(targetEntity="Thomas\CoreBundle\Entity\ProductCategory")
+    * @ORM\ManyToOne(targetEntity="Thomas\CoreBundle\Entity\ProductCategory", inversedBy="products")
+    * @ORM\JoinColumn(name="product_category_id", referencedColumnName="id")
     */
     private $productCategory;
 
@@ -48,12 +51,7 @@ class Product
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="reference", type="string", length=255, unique=true)
-     */
-    private $reference;
+
 
     /**
      * @var string
@@ -95,29 +93,7 @@ class Product
         return $this->id;
     }
 
-    /**
-     * Set reference
-     *
-     * @param string $reference
-     *
-     * @return Product
-     */
-    public function setReference($reference)
-    {
-        $this->reference = $reference;
-
-        return $this;
-    }
-
-    /**
-     * Get reference
-     *
-     * @return string
-     */
-    public function getReference()
-    {
-        return $this->reference;
-    }
+  
 
     /**
      * Set name
@@ -414,4 +390,6 @@ class Product
     {
         return $this->system;
     }
+
+
 }

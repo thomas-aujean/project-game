@@ -11,6 +11,24 @@ class CoreController extends Controller
   // La page d'accueil
   public function indexAction()
   {
+
+    $repository = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('ThomasCoreBundle:Setting')
+    ;
+
+    $setting = $repository->find(1);
+
+    if (null === $setting) {
+      throw new NotFoundHttpException("Les settings n'existent pas.");
+    }
+
+    // Le render ne change pas, on passait avant un tableau, maintenant un objet
+    return $this->render('ThomasCoreBundle:Core:index.html.twig', array(
+      'setting' => $setting
+    ));
+
+
     // On retourne simplement la vue de la page d'accueil
     // L'affichage des 3 dernières annonces utilisera le contrôleur déjà existant dans PlatformBundle
     return $this->render('ThomasCoreBundle:Core:index.html.twig');

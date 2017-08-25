@@ -1,0 +1,24 @@
+{# src/Thomas/PlatformBundle/Resources/views/Advert/edit.html.twig #}
+
+{% extends "ThomasBackOfficeBundle::layout.html.twig" %}
+
+{% block title %}
+  Modification des parametres - {{ parent() }}
+{% endblock %}
+
+{% block thomasbo_body %}
+
+  <h2>Modification des parametres</h2>
+
+  {{ include("ThomasBackOfficeBundle:Setting:form.html.twig") }}
+
+  
+
+  <p>
+    <a href="{{ path('thomas_back_office_product_index') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à l'accueil
+    </a>
+  </p>
+
+{% endblock %}

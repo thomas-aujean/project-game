@@ -2,6 +2,18 @@ thomas_game_home:
     path:     /
     defaults: { _controller: ThomasGameBundle:Product:index }
 
+thomas_game_systems:
+    path:     /consoles
+    defaults: { _controller: ThomasGameBundle:Product:systemIndex }
+
+thomas_game_games:
+    path:     /jeux
+    defaults: { _controller: ThomasGameBundle:Product:gameIndex }
+
+thomas_game_access:
+    path:     /accessoires
+    defaults: { _controller: ThomasGameBundle:Product:accessIndex }
+
 thomas_game_view:
     path:      /product/{id}
     defaults:

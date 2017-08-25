@@ -1,0 +1,43 @@
+{% extends "ThomasBackOfficeBundle::layout.html.twig" %}
+
+{% block title %}
+  Back Office- {{ parent() }}
+{% endblock %}
+
+
+{% block thomasbo_body %}
+
+{% for flashMessage in app.session.flashbag.get('info') %}
+    {{ flashMessage }}
+{% endfor %}
+
+
+<h1>Liste des produits</h1>
+
+<table style="width:100%">
+  <tr>
+    <th>Mail</th>
+    <th>Telephone</th> 
+    <th>Adresse</th>
+  </tr>
+  {% for setting in settings %}
+    <tr>
+
+      <td>{{ setting.mail }}</td>
+      <td>{{ setting.phone }}</td>
+      <td>{{ setting.address }}</td>
+
+    </tr>
+  {% endfor %}
+  
+</table>
+
+
+<p>
+  <a href="{{ path('thomas_back_office_setting_edit', {'id': 1}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Modifier les parametres
+  </a>
+  
+</p>
+{% endblock %}

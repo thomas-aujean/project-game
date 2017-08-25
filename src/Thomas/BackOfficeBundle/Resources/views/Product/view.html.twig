@@ -12,9 +12,14 @@
     {{ flashMessage }}
 {% endfor %}
 
-<h1>{{ product.name }} - {{ product.reference }}</h1>
+<h1>{{ product.name }}</h1>
 
 <div>{{ product.price }} €</div>
+<div>
+{% if product.productImage is not null %}
+  <img src="{{ asset(product.productImage.webPath) }}" alt="{{ product.productImage.alt }}"/>
+  {% endif %}
+</div>
 
 <p>
   <a href="{{ path('thomas_back_office_product_index') }}" class="btn btn-default">

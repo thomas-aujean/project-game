@@ -1,18 +1,20 @@
-{% extends "ThomasBackOfficeBundle::layout.html.twig" %}
-
+{% extends "ThomasGameBundle::layout.html.twig" %}
 {% block title %}
-  Back Office- {{ parent() }}
+  La base - {{ parent() }}
 {% endblock %}
 
+{% block search %}
+{{ include("ThomasGameBundle:Product:form.html.twig") }}
+{% endblock %}
+{% block thomasgame_body %}
+<h1>page des consoles</h1>
 
-{% block thomasbo_body %}
-
-{% for flashMessage in app.session.flashbag.get('info') %}
-    {{ flashMessage }}
-{% endfor %}
-
-
-<h1>Liste des produits</h1>
+{# {% if test is not null %}
+{% for t in test %}
+iciiii
+        {{ t.id }}
+  {% endfor %}
+{% endif %} #}
 
 <table style="width:100%">
   <tr>
@@ -23,10 +25,10 @@
     <th>Prix</th>
     <th>Console</th>
   </tr>
-  {% for product in products %}
+  {% for product in listSystems %}
     <tr>
       <td>{{ product.id }}</td>
-      <td><a href="{{ path('thomas_back_office_product_view', {'id': product.id}) }}">
+      <td><a href="{{ path('thomas_game_view', {'id': product.id}) }}">
           {{ product.name }}
         </a>
       </td> 
@@ -51,12 +53,5 @@
   
 </table>
 
-
-<p>
-  <a href="{{ path('thomas_back_office_product_add') }}" class="btn btn-default">
-    <i class="glyphicon glyphicon-chevron-left"></i>
-    Ajouter un produit
-  </a>
-  
-</p>
 {% endblock %}
+

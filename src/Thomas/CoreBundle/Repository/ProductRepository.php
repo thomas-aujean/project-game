@@ -10,4 +10,50 @@ namespace Thomas\CoreBundle\Repository;
  */
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findGames()
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        // On peut ajouter ce qu'on veut avant
+        $qb
+            ->where('p.productCategory = 1')
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findSystems($data = null)
+    {
+        
+        $qb = $this->createQueryBuilder('p');
+
+        // On peut ajouter ce qu'on veut avant
+        $qb
+            ->where('p.productCategory = 2')
+        ;
+
+
+        
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findAccess()
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        // On peut ajouter ce qu'on veut avant
+        $qb
+            ->where('p.productCategory = 3')
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
