@@ -7,5 +7,27 @@
 {% block thomasgame_body %}
 <h1>Mon panier</h1>
 
+<table>
+<tr>
+  <td>ligne</td>
+  <td>Id</td>
+  <td>Nom</div>
+  <td>Quantité</div>
+  <td>Prix</td>
+</tr>
+{% for item in panier %}
+ 
+<tr>
+  <td>{{ item.line }}</td>
+  <td>{{ item.id }}</td>
+  <td>{{ item.name }}</div>
+  <td>{{ item.qty }}</div>
+  <td>{{ item.price }} €</td>
+</tr>
+   {% endfor %}
+</div>
+</table>  
+
+
 {% endblock %}
 

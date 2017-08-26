@@ -19,43 +19,83 @@ class CartController extends Controller
         //     $session->set('panier', []);
         // }
         $panier = $session->get('panier');
-        dump($panier);die;
-        return $this->render('ThomasGameBundle:Cart:index.html.twig');
+        
+        
+// dump($this->getUser());die;
+// dump($panier);die;
+
+
+        return $this->render('ThomasGameBundle:Cart:index.html.twig', array(
+            'panier' => $panier,
+        ));
     }
 
     public function addAction(Request $request, $id)
     {
-        // $session = 
+        $added = false;
 
-        $session = $request->getSession();
-
-        if (!$session->has('panier')){
-            dump($session);die;
-            $session->set('panier', []);
-        }
         $repository = $this->getDoctrine()
         ->getManager()
         ->getRepository('ThomasCoreBundle:Product')
         ;
 
         $product = $repository->find($id);
-        $panier = $session->get('panier');
 
-        $panier = $product;
+        $session = $request->getSession();
+        // $session->remove('panier');die;
 
 
-        // if (array_key_exists($id, $panier)){
+        if (!$session->has('panier')){
+            $panier = $session->set('panier', []);
+            
+            $cartArray[1] = [
+                'id'    => $product->getId(),
+                'name'  => $product->getName(),
+                'price' => $product->getPrice(),
+                'qty'   => 1,
+                'line'   => 1,
+            ];
+            $session->set('panier',$cartArray);
+        } else{
+
+            $panier = $session->get('panier');
+
+            foreach ($panier as $item){
+                if ($item['id'] == $product->getId()) {
+                    $panier[$item['line']]['price'] += $product->getPrice();
+                    $panier[$item['line']]['qty'] ++;
+                    $added = true;
+                } 
+
+            }
+            if ($added == false){
+                $line = count($panier);
+                $cartArray = [
+                    'id'    => $product->getId(),
+                    'name'  => $product->getName(),
+                    'price' => $product->getPrice(),
+                    'qty'   => 1,  
+                    'line'  => $line +1,
+                ];
+
+                array_push($panier, $cartArray);
+            }
+            
+           
+
+            
+            $session->set('panier',$panier);
+        
+        }
+
+
+
         
 
-        // }
+        // dump($session->get('panier'));die;
 
-        // dump($request->attributes->get('id'));die;
-        dump($panier);die;
-        // dump($product->getId());die;
-
+        
         return $this->redirect($this->generateUrl('thomas_game_cart'));
-
-        // return $this->render('ThomasGameBundle:Cart:index.html.twig');
     }
 
     public function deleteAction($id)
