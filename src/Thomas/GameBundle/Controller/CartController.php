@@ -12,20 +12,47 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class CartController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-
-        
+        $session = $request->getSession();
+        // if (!$session->has('panier')){
+        //     $session->set('panier', []);
+        // }
+        $panier = $session->get('panier');
+        dump($panier);die;
         return $this->render('ThomasGameBundle:Cart:index.html.twig');
     }
 
     public function addAction(Request $request, $id)
     {
-        $session = new Session();
+        // $session = 
+
+        $session = $request->getSession();
+
         if (!$session->has('panier')){
+            dump($session);die;
             $session->set('panier', []);
         }
-// dump($session);die;
+        $repository = $this->getDoctrine()
+        ->getManager()
+        ->getRepository('ThomasCoreBundle:Product')
+        ;
+
+        $product = $repository->find($id);
+        $panier = $session->get('panier');
+
+        $panier = $product;
+
+
+        // if (array_key_exists($id, $panier)){
+        
+
+        // }
+
+        // dump($request->attributes->get('id'));die;
+        dump($panier);die;
+        // dump($product->getId());die;
+
         return $this->redirect($this->generateUrl('thomas_game_cart'));
 
         // return $this->render('ThomasGameBundle:Cart:index.html.twig');
