@@ -28,19 +28,21 @@
     </div>
 
     <div class="row">
-
+        {% block search %}
+        {% endblock %}
       <div id="menu" class="col-md-3">
 
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-    Connecté en tant que {{ app.user.username }}
+    Connecté en tant que <a href="{{ path('fos_user_profile_edit') }}">{{ app.user.username }}</a>
     -
     <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
 {% else %}
     <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-{% endif %}
 
-        {% block search %}
-        {% endblock %}
+    <p>Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
+{% endif %}
+<p>Voir mon <a href="{{ path('thomas_game_cart') }}">panier</a></p>
+        
         <h3>Les jeux video</h3>
         <ul class="nav nav-pills nav-stacked">
           <li><a href="{{ path('thomas_game_games') }}">Jeux Videos</a></li>
@@ -48,6 +50,9 @@
           <li><a href="{{ path('thomas_game_access') }}">Accessoires</a></li>
         
         </ul>
+
+        {% block myfilter %}
+        {% endblock %}
         <h3>Les annonces</h3>
         <ul class="nav nav-pills nav-stacked">
           <li><a href="{{ path('thomas_platform_home') }}">Accueil</a></li>

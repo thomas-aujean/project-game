@@ -5,6 +5,7 @@ namespace Thomas\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Thomas\CoreBundle\Form\ProductSearchType;
+use Thomas\CoreBundle\Form\SearchType;
 use Thomas\CoreBundle\Entity\Product;
 
 class ProductController extends Controller
@@ -120,6 +121,31 @@ class ProductController extends Controller
 
         return $this->render('ThomasGameBundle:Product:setting.html.twig', array(
         'setting' => $setting
+        ));
+    }
+
+    public function searchAction(Request $request, $string = null)
+    {
+        $product = new Product();
+        $form   = $this->get('form.factory')->create(SearchType::class, $product);
+        // $form   = $this->get('form.factory')->create(SearchType::class);
+
+        if ($request->isMethod('POST')) {
+// dump($request);die;
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                return $this->render('ThomasGameBundle:Product:systemIndex.html.twig', array(
+                    'form' => $form->createView(),
+                    'listSystems' => $listSystems,
+                    // 'test' => $test,
+                 ));
+
+            }
+        }
+
+
+        return $this->render('ThomasGameBundle:Product:search.html.twig', array(
+            'form' => $form->createView()
         ));
     }
 

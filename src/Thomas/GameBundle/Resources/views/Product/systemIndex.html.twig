@@ -3,9 +3,14 @@
   La base - {{ parent() }}
 {% endblock %}
 
-{% block search %}
+{% block myfilter %}
 {{ include("ThomasGameBundle:Product:form.html.twig") }}
 {% endblock %}
+
+{# {% block search %} #}
+{# {{ render(controller("ThomasGameBundle:Product:search")) }} #}
+{# {{ include("ThomasGameBundle:Product:search.html.twig") }} #}
+{# {% endblock %} #}
 {% block thomasgame_body %}
 <h1>page des consoles</h1>
 
@@ -16,42 +21,31 @@ iciiii
   {% endfor %}
 {% endif %} #}
 
-<table style="width:100%">
-  <tr>
-    <th>Id</th>
-    <th>Nom du produit</th> 
-    <th>Categorie</th>
-    <th>Marque</th>
-    <th>Prix</th>
-    <th>Console</th>
-  </tr>
   {% for product in listSystems %}
-    <tr>
-      <td>{{ product.id }}</td>
-      <td><a href="{{ path('thomas_game_view', {'id': product.id}) }}">
-          {{ product.name }}
-        </a>
-      </td> 
-      <td>
+
+
+    <div class="col-md-3">
+    <a href="{{ path('thomas_game_view', {'id': product.id}) }}">
+          {% if product.productImage is not null %}
+          <img src="{{ asset(product.productImage.webPath) }}" alt="{{ product.productImage.alt }}" style="width:100%;max-height:200px"/>
+          {% endif %}
+       
+      {{ product.name }} - {{ product.price }} €
+    </a>
       {% if product.productCategory is not null %}
-        {{ product.productCategory.name }}
+        <div>Catégorie - {{ product.productCategory.name }}</div>
       {% endif %}
-      </td>
-      <td>
-      {% if product.brand is not null %}
-        {{ product.brand.name }}
-      {% endif %}
-      </td>
-      <td>{{ product.price }}</td>
-      <td>
+
       {% if product.system is not null %}
-        {{ product.system.name }}
+        <div>Console - {{ product.system.name }}</div>
       {% endif %}
-      </td>
-    </tr>
+
+      <a>Ajouter au panier</a>
+    </div>
+
+
+
   {% endfor %}
-  
-</table>
 
 {% endblock %}
 

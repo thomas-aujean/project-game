@@ -56,4 +56,18 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
             ->getResult()
         ;
     }
+
+    public function search($string)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        // On peut ajouter ce qu'on veut avant
+        $qb
+            ->where('p.productCategory = 3')
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
