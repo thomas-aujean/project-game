@@ -71,12 +71,7 @@ class Product
      */
     private $price;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="rates", type="integer", nullable=true)
-     */
-    private $rates;
+ 
 
 
 
@@ -145,30 +140,6 @@ class Product
     public function getPrice()
     {
         return $this->price;
-    }
-
-    /**
-     * Set rates
-     *
-     * @param integer $rates
-     *
-     * @return Product
-     */
-    public function setRates($rates)
-    {
-        $this->rates = $rates;
-
-        return $this;
-    }
-
-    /**
-     * Get rates
-     *
-     * @return int
-     */
-    public function getRates()
-    {
-        return $this->rates;
     }
 
     

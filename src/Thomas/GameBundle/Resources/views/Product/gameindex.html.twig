@@ -3,6 +3,9 @@
   La base - {{ parent() }}
 {% endblock %}
 
+{% block myfilter %}
+{{ include("ThomasGameBundle:Product:form.html.twig") }}
+{% endblock %}
 
 {% block thomasgame_body %}
 <h1>Nos jeux</h1>

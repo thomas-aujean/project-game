@@ -4,7 +4,8 @@ namespace Thomas\GameBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Thomas\CoreBundle\Form\ProductSearchType;
+use Thomas\CoreBundle\Form\SystemSearchType;
+use Thomas\CoreBundle\Form\GameSearchType;
 use Thomas\CoreBundle\Form\SearchType;
 use Thomas\CoreBundle\Entity\Product;
 
@@ -12,17 +13,7 @@ class ProductController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('ThomasGameBundle:Product:index.html.twig');
-    }
 
-
-    public function systemIndexAction(Request $request)
-    {
-        $listSystems = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('ThomasCoreBundle:Product')
-            ->findSystems()
-        ;
         $product = new Product();
         $form   = $this->get('form.factory')->create(ProductSearchType::class, $product);
 
@@ -30,7 +21,11 @@ class ProductController extends Controller
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $data = $form->getData();
+                $test =$data->getBrand();
+                
+                dump($data->getBrand()->getId());
                 dump($data);
+                dump($request);
                 // dump($form);
                 // dump($request->request->get('brand'));
                 die;
@@ -42,6 +37,43 @@ class ProductController extends Controller
 
             }
         }
+        return $this->render('ThomasGameBundle:Product:index.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+
+    public function systemIndexAction(Request $request)
+    {
+        $listSystems = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('ThomasCoreBundle:Product')
+            ->findSystems()
+        ;
+
+        $product = new Product();
+        $form   = $this->get('form.factory')->create(SystemSearchType::class, $product);
+
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $test =$data->getBrand();
+                if (!$test) {
+                    $id = null;
+                } else {
+                    $id = $data->getBrand()->getId();
+                }
+                
+                $listSystems = $this->getDoctrine()->getManager()
+                    ->getRepository('ThomasCoreBundle:Product')
+                    ->findSystems($id)
+                ;
+
+            }
+        }
+
 
         return $this->render('ThomasGameBundle:Product:systemIndex.html.twig', array(
             'form' => $form->createView(),
@@ -50,7 +82,7 @@ class ProductController extends Controller
         ));
     }
 
-    public function gameIndexAction()
+    public function gameIndexAction(Request $request)
     {
         $listGames = $this->getDoctrine()
             ->getManager()
@@ -58,8 +90,34 @@ class ProductController extends Controller
             ->findGames()
         ;
 
+        $product = new Product();
+        $form   = $this->get('form.factory')->create(GameSearchType::class, $product);
+
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $system =$data->getSystem();
+                if (!$system) {
+                    $console = null;
+                } else {
+                    $console = $data->getSystem()->getId();
+                }
+                $name =$data->getName();
+                
+                $listGames = $this->getDoctrine()->getManager()
+                    ->getRepository('ThomasCoreBundle:Product')
+                    ->findGames($console, $name)
+                ;
+
+            }
+        }
+
+
         return $this->render('ThomasGameBundle:Product:gameIndex.html.twig', array(
             'listGames' => $listGames,
+            'form' => $form->createView(),
         ));
     }
 
@@ -164,6 +222,13 @@ class ProductController extends Controller
         return $this->render('ThomasGameBundle:Product:suggestion.html.twig', array(
         'listProducts' => $listProducts
         ));
+    }
+
+    public function rateAction(Request $request, $id)
+    {
+        
+
+        return $this->redirectToRoute('thomas_game_view', array('id' =>$id));
     }
 
 

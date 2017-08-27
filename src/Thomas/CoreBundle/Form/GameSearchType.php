@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class ProductSearchType extends AbstractType
+class GameSearchType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -17,29 +17,18 @@ class ProductSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('product_category', EntityType::class, array(
-                'class'        => 'ThomasCoreBundle:ProductCategory',
-                'choice_label' => 'name',
+            ->add('name', TextType::class, array(
                 'required'     => false,
-            ))
-            ->add('brand', EntityType::class, array(
-                'class'        => 'ThomasCoreBundle:Brand',
-                'choice_label' => 'name',
-                'multiple'     => false,
-                'required'     => false,
-            ))
-            ->add('editor', EntityType::class, array(
-                'class'        => 'ThomasCoreBundle:Editor',
-                'choice_label' => 'name',
-                'multiple'     => false,
-                'required'     => false,
+                'label'        => 'Nom'
             ))
             ->add('system', EntityType::class, array(
                 'class'        => 'ThomasCoreBundle:System',
                 'choice_label' => 'name',
                 'multiple'     => false,
                 'required'     => false,
+                'label'        => 'Console'
             ))
+
             ->add('search',       SubmitType::class);
         ;
     }

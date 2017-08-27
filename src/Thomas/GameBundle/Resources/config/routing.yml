@@ -36,10 +36,14 @@ thomas_game_valid:
 
 
 
+thomas_game_rate:
+    path:     /avis/{id}
+    defaults: { _controller: ThomasGameBundle:Product:rate }
 
 
-
-
+thomas_game_products:
+    path:     /produits
+    defaults: { _controller: ThomasGameBundle:Product:index }
 
 thomas_game_systems:
     path:     /consoles

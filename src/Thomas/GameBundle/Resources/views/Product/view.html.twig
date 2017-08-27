@@ -34,7 +34,15 @@
       </div>
     </div>
     <a href="{{ path('thomas_game_add', {'id': product.id}) }}">Ajouter au panier</a>
+    <div>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <a href="{{ path('thomas_game_rate', {'id': product.id}) }}">Donnez-lui une note</a>
+    {% endif %}
+    </div>
+
   </div>
+
+   
 
 
   {% if product.productCategory.id != 2 %}
