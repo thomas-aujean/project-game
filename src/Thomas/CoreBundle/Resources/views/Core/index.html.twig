@@ -7,7 +7,9 @@
 
 {% block body %}
 
-  
+  {% for flashMessage in app.session.flashbag.get('notice') %}
+    {{ flashMessage }}
+  {% endfor %}
   <h3>Derniers produits ajoutés</h3>
   {{ render(controller("ThomasGameBundle:Product:menu", {'limit': 3})) }}
   <p>

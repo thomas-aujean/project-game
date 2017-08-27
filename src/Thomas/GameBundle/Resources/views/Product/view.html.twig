@@ -5,17 +5,43 @@
 
 
 {% block thomasgame_body %}
-<h1>page view</h1>
 
 
-<h1>{{ product.name }}</h1>
+  <h1>{{ product.name }}</h1>
 
-<div>{{ product.price }} €</div>
-<div>
-{% if product.productImage is not null %}
-  <img src="{{ asset(product.productImage.webPath) }}" alt="{{ product.productImage.alt }}"/>
+  <div class="row">
+    <div class="col-md-6">
+    {% if product.productImage is not null %}
+      <img src="{{ asset(product.productImage.webPath) }}" alt="{{ product.productImage.alt }}" style="width:100%"/>
+      {% endif %}
+    </div>
+    <div class="col-md-6">
+      {% if product.system is not null %}
+      <div class="row">
+        <div class="col-md-6">Console</div>
+        <div class="col-md-6">{{ product.system.name }}</div>
+      </div>
+      {% endif %}
+      {% if product.editor is not null %}
+      <div class="row">
+        <div class="col-md-6">Editeur</div>
+        <div class="col-md-6">{{ product.editor.name }}</div>
+      </div>
+      {% endif %}
+      <div class="row">
+        <div class="col-md-6">Prix</div>
+        <div class="col-md-6">{{ product.price }} €</div>
+      </div>
+    </div>
+    <a href="{{ path('thomas_game_add', {'id': product.id}) }}">Ajouter au panier</a>
+  </div>
+
+
+  {% if product.productCategory.id != 2 %}
+  also
+    {{ render(controller("ThomasGameBundle:Product:suggestion", {'filter': product.system.id, 'limit': 3})) }}
+  {% else %}
+    {# {{ render(controller("ThomasGameBundle:Product:suggestion", {'filter': product.system.id, 'limit': 3})) }} #}
   {% endif %}
-</div>
-
 {% endblock %}
 

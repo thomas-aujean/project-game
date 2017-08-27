@@ -2,7 +2,7 @@ thomas_back_office_homepage:
     path:     /
     defaults: { _controller: ThomasBackOfficeBundle:Default:index }
 
-
+# PRODUITS
 
 thomas_back_office_product_index:
     path:     products
@@ -25,13 +25,24 @@ thomas_back_office_product_delete:
     defaults: { _controller: ThomasBackOfficeBundle:Product:delete }
 
 
+# USERS
+
 thomas_back_office_users:
     path:     users
     defaults: { _controller: ThomasBackOfficeBundle:User:index }
 
+# ORDERS
+
 thomas_back_office_orders:
     path:     orders
     defaults: { _controller: ThomasBackOfficeBundle:Order:index }
+
+thomas_back_office_order_view:
+    path:     order/{id}
+    defaults: { _controller: ThomasBackOfficeBundle:Order:view }
+
+
+# SETTINGS
 
 thomas_back_office_settings:
     path:     settings

@@ -5,8 +5,9 @@
 
 
 {% block thomasgame_body %}
-<h1>Mon panier</h1>
+<h1>Récapitulatif</h1>
 
+<h3>  Ma commande</h3>
 {% if total == 0 %}
     Votre panier est vide =(
 {% else %}
@@ -17,7 +18,6 @@
         <td>Quantité</div>
         <td>Prix Unitaire</td>
         <td>Sous total</td>
-        <td></td>
       </tr>
       {% for key,item in panier %}
  
@@ -31,19 +31,34 @@
         </div>
         <td>{{ item.unitPrice }} €</td>
         <td>{{ item.price }} €</td>
-        <td><a href="{{ path('thomas_game_delete', {'id': key}) }}">Supprimer ligne</a></td>
       </tr>
       {% endfor %}
   </table>  
-
   total : {{ total }} €
+
+<h3>Mes infos</h3>
+<div>
   <div>
-    <a href="{{ path('thomas_game_remove') }}">Vider le panier</a>
+    Nom - {{ app.user.username }}
   </div>
+  <div>
+    Adresse - {{ app.user.address }}
+  </div>
+  <div>
+    Code postal - {{ app.user.zipcode }}
+  </div>
+  <div>
+    Ville - {{ app.user.city }}
+  </div>
+
+</div>
   
+
+
+
   <div>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-    <a href="{{ path('thomas_game_order') }}">Passer commande</a>
+    <a href="{{ path('thomas_game_valid') }}">Valider ma commande</a>
     {% else %}
     Vous devez être enregistré pour passer commande
         <a href="{{ path('fos_user_security_login') }}">Connexion</a>
@@ -52,8 +67,6 @@
   </div>
 
 {% endif %}
-
-
 
 {% endblock %}
 

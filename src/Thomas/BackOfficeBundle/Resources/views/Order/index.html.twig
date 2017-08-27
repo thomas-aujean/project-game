@@ -1,10 +1,41 @@
 {% extends "ThomasBackOfficeBundle::layout.html.twig" %}
 
 {% block title %}
-  La base dthdth- {{ parent() }}
+  Back Office- {{ parent() }}
 {% endblock %}
 
 
 {% block thomasbo_body %}
-<h1>order index</h1>
+
+{% for flashMessage in app.session.flashbag.get('info') %}
+    {{ flashMessage }}
+{% endfor %}
+
+
+<h1>Liste des commandes</h1>
+
+<table style="width:100%">
+  <tr>
+    <th>Id</th>
+    <th>Utilisateur</th> 
+    <th>Date</th>
+    <th>Montant</th>
+  </tr>
+  {% for order in orders %}
+    <tr>
+      <td><a href="{{ path('thomas_back_office_order_view', {'id': order.id}) }}">{{ order.id }}</td>
+      <td><a href="{{ path('thomas_back_office_order_view', {'id': order.id}) }}">
+           {{ order.user.username }} 
+        </a>
+      </td> 
+
+      <td>{{ order.created|date("m/d/Y") }}</td>
+      <td>{{ order.amount }}</td>
+
+    </tr>
+  {% endfor %}
+  
+</table>
+
+
 {% endblock %}

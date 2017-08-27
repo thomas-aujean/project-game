@@ -88,3 +88,9 @@ fos_user:
     from_email:
         address: "thomas@project-game.com"
         sender_name: "No Reply"
+    registration:
+        form:
+            type: Thomas\UserBundle\Form\RegistrationType
+    profile:
+        form:
+            type: Thomas\UserBundle\Form\RegistrationType

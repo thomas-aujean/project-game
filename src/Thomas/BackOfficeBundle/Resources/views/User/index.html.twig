@@ -1,10 +1,43 @@
 {% extends "ThomasBackOfficeBundle::layout.html.twig" %}
 
 {% block title %}
-  Back Office - {{ parent() }}
+  Back Office- {{ parent() }}
 {% endblock %}
 
 
 {% block thomasbo_body %}
-<h1>user index</h1>
+
+{% for flashMessage in app.session.flashbag.get('info') %}
+    {{ flashMessage }}
+{% endfor %}
+
+
+<h1>Liste des utilisateurs</h1>
+
+<table style="width:100%">
+  <tr>
+    <th>Id</th>
+    <th>Nom</th> 
+    <th>Email</th>
+    <th>Code Postal</th>
+    <th>Adresse</th>
+  </tr>
+  {% for user in users %}
+    <tr>
+      <td>{{ user.id }}</td>
+      <td><a href="{{ path('thomas_back_office_product_view', {'id': user.id}) }}">
+          {{ user.username }}
+        </a>
+      </td> 
+
+      <td>{{ user.email }}</td>
+      <td>{{ user.zipcode }}</td>
+      <td>{{ user.address }}</td>
+
+    </tr>
+  {% endfor %}
+  
+</table>
+
+
 {% endblock %}

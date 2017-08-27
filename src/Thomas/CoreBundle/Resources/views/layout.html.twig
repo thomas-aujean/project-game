@@ -11,6 +11,8 @@
     {% block stylesheets %}
       {# On charge le CSS de bootstrap depuis le site directement #}
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+      
     {% endblock %}
   </head>
 
@@ -43,7 +45,6 @@
 {% endif %}
 <p>Voir mon <a href="{{ path('thomas_game_cart') }}">panier</a></p>
         
-        <h3>Les jeux video</h3>
         <ul class="nav nav-pills nav-stacked">
           <li><a href="{{ path('thomas_game_games') }}">Jeux Videos</a></li>
           <li><a href="{{ path('thomas_game_systems') }}">Consoles</a></li>
@@ -53,20 +54,22 @@
 
         {% block myfilter %}
         {% endblock %}
-        <h3>Les annonces</h3>
+        {# <h3>Les annonces</h3>
         <ul class="nav nav-pills nav-stacked">
           <li><a href="{{ path('thomas_platform_home') }}">Accueil</a></li>
           {% if is_granted('ROLE_USER') %}
             <li><a href="{{ path('thomas_platform_add') }}">Ajouter une annonce</a></li>
           {% endif %}
-        </ul>
+        </ul> #}
 
-        <h4>Dernières annonces</h4>
-        {{ render(controller("ThomasPlatformBundle:Advert:menu", {'limit': 3})) }}
+        {# <h4>Dernières annonces</h4>
+        {{ render(controller("ThomasPlatformBundle:Advert:menu", {'limit': 3})) }} #}
+        
+        
         <hr>
-          {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('thomas_back_office_homepage') }}">Back Office</a>
-          {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+          <a href="{{ path('thomas_back_office_homepage') }}">Back Office</a>
+        {% endif %}
 
 
       </div>

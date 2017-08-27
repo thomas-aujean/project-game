@@ -47,11 +47,6 @@ class MyOrder
      */
     private $created;
 
-    public function __construct()
-    {
-        $this->created = new \DateTime();
-    }
-
 
     /**
      * Get id
@@ -110,52 +105,5 @@ class MyOrder
     {
         return $this->created;
     }
-
-    /**
-     * Set detail
-     *
-     * @param string $detail
-     *
-     * @return MyOrder
-     */
-    public function setDetail($detail)
-    {
-        $this->detail = $detail;
-
-        return $this;
-    }
-
-    /**
-     * Get detail
-     *
-     * @return string
-     */
-    public function getDetail()
-    {
-        return $this->detail;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Thomas\UserBundle\Entity\User $user
-     *
-     * @return MyOrder
-     */
-    public function setUser(\Thomas\UserBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Thomas\UserBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }
+

@@ -27,7 +27,7 @@
         <div>Console - {{ product.system.name }}</div>
       {% endif %}
 
-      <a>Ajouter au panier</a>
+      <a href="{{ path('thomas_game_add', {'id': product.id}) }}">Ajouter au panier</a>
     </div>
 
 

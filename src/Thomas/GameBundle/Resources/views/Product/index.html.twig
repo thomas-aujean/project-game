@@ -5,6 +5,9 @@
 
 
 {% block thomasgame_body %}
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    {{ flashMessage }}
+{% endfor %}
 <h1>page index</h1>
 
 {% endblock %}

@@ -149,4 +149,22 @@ class ProductController extends Controller
         ));
     }
 
+
+    public function suggestionAction($filter, $limit)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $listProducts = $em->getRepository('ThomasCoreBundle:Product')->findBy(
+        array('system'=> $filter),                 // Pas de critère
+        array('id' => 'desc'), // On trie par date décroissante
+        $limit,                  // On sélectionne $limit annonces
+        0                        // À partir du premier
+        );
+
+        return $this->render('ThomasGameBundle:Product:suggestion.html.twig', array(
+        'listProducts' => $listProducts
+        ));
+    }
+
+
 }

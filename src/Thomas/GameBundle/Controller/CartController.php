@@ -15,18 +15,19 @@ class CartController extends Controller
     public function indexAction(Request $request)
     {
         $session = $request->getSession();
-        // if (!$session->has('panier')){
-        //     $session->set('panier', []);
-        // }
+        if (!$session->has('panier')){
+            $session->set('panier', []);
+        }
         $panier = $session->get('panier');
-        
-        
-// dump($this->getUser());die;
-// dump($panier);die;
+        $total =0;
+        foreach ($panier as $item){
+            $total += $item['price'];
+        }
 
 
         return $this->render('ThomasGameBundle:Cart:index.html.twig', array(
             'panier' => $panier,
+            'total' => $total,
         ));
     }
 
@@ -42,67 +43,104 @@ class CartController extends Controller
         $product = $repository->find($id);
 
         $session = $request->getSession();
-        // $session->remove('panier');die;
+        
 
 
         if (!$session->has('panier')){
             $panier = $session->set('panier', []);
             
-            $cartArray[1] = [
+            $cartArray[0] = [
                 'id'    => $product->getId(),
                 'name'  => $product->getName(),
                 'price' => $product->getPrice(),
+                'unitPrice' => $product->getPrice(),
                 'qty'   => 1,
-                'line'   => 1,
             ];
-            $session->set('panier',$cartArray);
+            $session->set('panier', $cartArray);
         } else{
 
             $panier = $session->get('panier');
 
-            foreach ($panier as $item){
+            foreach ($panier as $key => $item){
                 if ($item['id'] == $product->getId()) {
-                    $panier[$item['line']]['price'] += $product->getPrice();
-                    $panier[$item['line']]['qty'] ++;
+                    $panier[$key]['price'] += $product->getPrice();
+                    $panier[$key]['qty'] ++;
                     $added = true;
                 } 
 
             }
             if ($added == false){
-                $line = count($panier);
+                $line = count($panier) - 1;
                 $cartArray = [
                     'id'    => $product->getId(),
                     'name'  => $product->getName(),
                     'price' => $product->getPrice(),
+                    'unitPrice' => $product->getPrice(),
                     'qty'   => 1,  
-                    'line'  => $line +1,
                 ];
 
                 array_push($panier, $cartArray);
             }
             
-           
-
-            
             $session->set('panier',$panier);
         
         }
-
-
-
-        
-
-        // dump($session->get('panier'));die;
-
-        
+   
         return $this->redirect($this->generateUrl('thomas_game_cart'));
     }
 
-    public function deleteAction($id)
+    public function deleteAction(Request $request, $id)
     {
 
+        $session = $request->getSession();
+        $panier = $session->get('panier');
 
-        return $this->render('ThomasGameBundle:Cart:delete.html.twig');
+        unset($panier[$id]);
+
+        $session->set('panier', $panier);
+
+        return $this->redirect($this->generateUrl('thomas_game_cart'));
+    }
+
+    public function removeCartAction(Request $request)
+    {
+
+        $session = $request->getSession();
+        $session->remove('panier');
+
+        return $this->redirect($this->generateUrl('thomas_game_cart'));
+    }
+
+    public function addQtyAction(Request $request, $id)
+    {
+
+        $session = $request->getSession();
+        $panier = $session->get('panier');
+
+        $panier[$id]['qty']++;
+        $panier[$id]['price'] = $panier[$id]['qty'] * $panier[$id]['unitPrice'];
+
+        $session->set('panier', $panier);
+
+        return $this->redirect($this->generateUrl('thomas_game_cart'));
+    }
+
+    public function removeQtyAction(Request $request, $id)
+    {
+
+        $session = $request->getSession();
+        $panier = $session->get('panier');
+
+        $panier[$id]['qty']--;
+        $panier[$id]['price'] = $panier[$id]['qty'] * $panier[$id]['unitPrice'];
+
+        if ($panier[$id]['qty'] == 0) {
+            unset($panier[$id]);
+        }
+
+        $session->set('panier', $panier);
+
+        return $this->redirect($this->generateUrl('thomas_game_cart'));
     }
 
 }

@@ -8,8 +8,34 @@ class OrderController extends Controller
 {
     public function indexAction()
     {
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('ThomasCoreBundle:MyOrder')
+        ;
+
+        $listOrders = $repository->findAll();
+
         return $this->render('ThomasBackOfficeBundle:Order:index.html.twig', array(
-            // ...
+            'orders' => $listOrders
+        ));
+    }
+
+    public function viewAction($id)
+    {
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('ThomasCoreBundle:MyOrder')
+        ;
+
+        $order = $repository->find($id);
+
+        $cart = unserialize($order->getDetail());
+
+        return $this->render('ThomasBackOfficeBundle:Order:view.html.twig', array(
+            'order' => $order,
+            'cart' => $cart
         ));
     }
 

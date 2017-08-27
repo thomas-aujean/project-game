@@ -10,6 +10,37 @@ thomas_game_add:
     path:     /ajouter/{id}
     defaults: { _controller: ThomasGameBundle:Cart:add }
 
+thomas_game_delete:
+    path:     /effacer/{id}
+    defaults: { _controller: ThomasGameBundle:Cart:delete }
+
+thomas_game_remove:
+    path:     /vider
+    defaults: { _controller: ThomasGameBundle:Cart:removeCart }
+
+thomas_game_add_qty:
+    path:     /plus/{id}
+    defaults: { _controller: ThomasGameBundle:Cart:addQty }
+
+thomas_game_remove_qty:
+    path:     /moins/{id}
+    defaults: { _controller: ThomasGameBundle:Cart:removeQty }
+
+thomas_game_order:
+    path:     /commande
+    defaults: { _controller: ThomasGameBundle:Order:recap }
+
+thomas_game_valid:
+    path:     /validation
+    defaults: { _controller: ThomasGameBundle:Order:valid }
+
+
+
+
+
+
+
+
 thomas_game_systems:
     path:     /consoles
     defaults: { _controller: ThomasGameBundle:Product:systemIndex }

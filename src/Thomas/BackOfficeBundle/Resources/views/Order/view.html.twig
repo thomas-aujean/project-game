@@ -1,0 +1,47 @@
+{% extends "ThomasBackOfficeBundle::layout.html.twig" %}
+
+{% block title %}
+  Back Office- {{ parent() }}
+{% endblock %}
+
+
+{% block thomasbo_body %}
+
+{% for flashMessage in app.session.flashbag.get('info') %}
+    {{ flashMessage }}
+{% endfor %}
+
+
+<h1>Commande n° {{ order.id }} passée le {{ order.created|date("m/d/Y") }}</h1>
+    <table>
+      <tr>
+        <td>Id</td>
+        <td>Nom</div>
+        <td>Quantité</div>
+        <td>Prix Unitaire</td>
+        <td>Sous total</td>
+      </tr>
+      {% for key,item in cart %}
+ 
+      <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</div>
+        <td>     
+          {{ item.qty }}
+        </div>
+        <td>{{ item.unitPrice }} €</td>
+        <td>{{ item.price }} €</td>
+      </tr>
+      {% endfor %}
+  </table>  
+
+<div>Total : {{ order.amount }}</div>
+
+<h4>Client  {{ order.user }} </h4>
+
+<a href="{{ path('thomas_back_office_orders') }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Retour à la liste
+  </a>
+
+{% endblock %}
