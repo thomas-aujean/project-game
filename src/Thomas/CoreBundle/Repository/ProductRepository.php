@@ -11,6 +11,44 @@ namespace Thomas\CoreBundle\Repository;
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    public function findProducts($category = null, $brand = null, $system = null, $name = null)
+    {
+
+
+        $qb = $this->createQueryBuilder('p');
+        
+        if ($category) {
+            $qb
+                ->andWhere('p.productCategory = :category')
+                ->setParameter('category', $category)
+            ;
+        }
+        if ($brand) {
+            $qb
+                ->andWhere('p.brand = :brand')
+                ->setParameter('brand', $brand)
+            ;
+        }
+        if ($system) {
+            $qb
+                ->andWhere('p.system = :system')
+                ->setParameter('system', $system)
+            ;
+        }
+
+        if ($name) {
+            $qb
+                ->andWhere('p.name like :name')
+                ->setParameter('name', '%'.$name.'%')
+            ;
+        }
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findGames($system = null, $name = null)
     {
         $qb = $this->createQueryBuilder('p');

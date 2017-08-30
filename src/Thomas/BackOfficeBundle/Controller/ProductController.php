@@ -6,11 +6,12 @@ use Thomas\CoreBundle\Entity\Product;
 use Thomas\CoreBundle\Form\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Thomas\BackOfficeBundle\Form\SearchType;
 
 
 class ProductController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $repository = $this
             ->getDoctrine()
@@ -20,7 +21,55 @@ class ProductController extends Controller
 
         $listProducts = $repository->findAll();
 
+        $product = new Product();
+        $form   = $this->get('form.factory')->create(SearchType::class, $product);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $data = $form->getData();
+
+                $marque =$data->getBrand();
+                if (!$marque) {
+                    $brand = null;
+                } else {
+                    $brand = $data->getBrand()->getId();
+                }
+
+                $cat =$data->getProductCategory();
+                if (!$cat) {
+                    $category = null;
+                } else {
+                    $category = $data->getProductCategory()->getId();
+                }
+
+                $console =$data->getSystem();
+                if (!$console) {
+                    $system = null;
+                } else {
+                    $system = $data->getSystem()->getId();
+                }
+
+                $nom =$data->getName();
+                if (!$nom) {
+                    $name = null;
+                } else {
+                    $name = $data->getName();
+                }
+                
+
+                $listProducts = $this->getDoctrine()->getManager()
+                    ->getRepository('ThomasCoreBundle:Product')
+                    ->findProducts($category, $brand, $system, $name)
+                ;
+
+            }
+        }
+
+        
+
         return $this->render('ThomasBackOfficeBundle:Product:index.html.twig', array(
+            'form' => $form->createView(),
             'products' => $listProducts
         ));
     }
