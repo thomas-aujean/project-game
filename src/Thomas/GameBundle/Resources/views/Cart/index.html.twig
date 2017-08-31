@@ -43,6 +43,8 @@
   
   <div>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+
     <a href="{{ path('thomas_game_order') }}">Passer commande</a>
     {% else %}
     Vous devez être enregistré pour passer commande

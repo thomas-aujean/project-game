@@ -25,6 +25,29 @@ thomas_back_office_product_delete:
     defaults: { _controller: ThomasBackOfficeBundle:Product:delete }
 
 
+# REMISES
+
+thomas_back_office_coupon_index:
+    path:     remises
+    defaults: { _controller: ThomasBackOfficeBundle:Coupon:index }
+
+thomas_back_office_coupon_view:
+    path:     /remise/{id}
+    defaults: { _controller: ThomasBackOfficeBundle:Coupon:view }
+
+thomas_back_office_coupon_edit:
+    path:     /remise-edit/{id}
+    defaults: { _controller: ThomasBackOfficeBundle:Coupon:edit }
+
+thomas_back_office_coupon_add:
+    path:     /remise-add
+    defaults: { _controller: ThomasBackOfficeBundle:Coupon:add }
+
+thomas_back_office_coupon_delete:
+    path:     /remise-delete/{id}
+    defaults: { _controller: ThomasBackOfficeBundle:Coupon:delete }
+
+
 # USERS
 
 thomas_back_office_users:

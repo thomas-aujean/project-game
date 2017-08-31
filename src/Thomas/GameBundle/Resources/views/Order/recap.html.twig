@@ -24,17 +24,25 @@
       <tr>
         <td>{{ item.id }}</td>
         <td>{{ item.name }}</div>
-        <td>
-          <a href="{{ path('thomas_game_remove_qty', {'id': key}) }}">-</a>         
+        <td>       
           {{ item.qty }}
-          <a href="{{ path('thomas_game_add_qty', {'id': key}) }}">+</a>
-        </div>
+        </td>
         <td>{{ item.unitPrice }} €</td>
         <td>{{ item.price }} €</td>
       </tr>
       {% endfor %}
   </table>  
   total : {{ total }} €
+
+{% if app.session.get('coupon') %}
+  <div>
+    Avec réduction de {{ app.session.get('coupon') }} %
+  </div>
+  <div>
+    Nouveau total {{ total - subs }} €
+  </div>
+
+{% endif %}
 
 <h3>Mes infos</h3>
 <div>
@@ -52,12 +60,15 @@
   </div>
 
 </div>
-  
-
-
 
   <div>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+    {% if app.session.get('coupon') %}
+    {% else %}
+      <h3>Vous avez un code promo ?</h3>
+      {{ include("ThomasBackOfficeBundle:Product:form.html.twig") }}
+    {% endif %}
     <a href="{{ path('thomas_game_valid') }}">Valider ma commande</a>
     {% else %}
     Vous devez être enregistré pour passer commande

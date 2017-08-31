@@ -63,3 +63,18 @@ thomas_game_view:
         _controller: ThomasGameBundle:Product:view
     requirements:
         id: \d+
+
+
+
+
+thomas_game_qsn:
+    path:     /qui-sommes-nous
+    defaults: { _controller: ThomasGameBundle:Page:qsn }
+
+thomas_game_ml:
+    path:     /mentions-legales
+    defaults: { _controller: ThomasGameBundle:Page:ml }
+
+thomas_game_cgv:
+    path:     /cgv
+    defaults: { _controller: ThomasGameBundle:Page:cgv }

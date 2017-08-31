@@ -29,6 +29,13 @@ class MyOrder
     /**
      * @var string
      *
+     * @ORM\Column(name="coupon", type="integer")
+     */
+    private $coupon;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="amount", type="decimal", precision=10, scale=2)
      */
     private $amount;
@@ -157,5 +164,29 @@ class MyOrder
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set coupon
+     *
+     * @param integer $coupon
+     *
+     * @return MyOrder
+     */
+    public function setCoupon($coupon)
+    {
+        $this->coupon = $coupon;
+
+        return $this;
+    }
+
+    /**
+     * Get coupon
+     *
+     * @return integer
+     */
+    public function getCoupon()
+    {
+        return $this->coupon;
     }
 }

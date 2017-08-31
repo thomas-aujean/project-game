@@ -1,0 +1,48 @@
+{% extends "ThomasBackOfficeBundle::layout.html.twig" %}
+
+{% block title %}
+  Back Office- {{ parent() }}
+{% endblock %}
+
+
+{% block thomasbo_body %}
+
+{% for flashMessage in app.session.flashbag.get('info') %}
+    {{ flashMessage }}
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    {{ flashMessage }}
+{% endfor %}
+
+<h1>Liste des remises</h1>
+
+<table style="width:100%">
+  <tr>
+    <th>Id</th>
+    <th>Code de la remise</th> 
+    <th>Pourcentage</th>
+  </tr>
+  {% for coupon in coupons %}
+    <tr>
+      <td>{{ coupon.id }}</td>
+      <td><a href="{{ path('thomas_back_office_coupon_view', {'id': coupon.id}) }}">
+          {{ coupon.name }}
+        </a>
+      </td> 
+      <td>{{ coupon.percent }}</td>
+
+    </tr>
+  {% endfor %}
+  
+</table>
+
+
+<p>
+  <a href="{{ path('thomas_back_office_coupon_add') }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Ajouter une remise
+  </a>
+  
+</p>
+{% endblock %}

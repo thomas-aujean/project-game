@@ -171,6 +171,86 @@ class ProductController extends Controller
         ));
     }
 
+    public function bestAction($limit)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+
+        $orders = $em->getRepository('ThomasCoreBundle:MyOrder')->findAll();
+        foreach ($orders as $order) {
+            $details = unserialize($order->getDetail());
+            foreach ($details as  $key => $detail){
+                
+                $bests[] = [
+                    $detail['id'] => $detail['qty']
+                ];
+                $tests[] = [
+                    'id' => $detail['id'],
+                    'qty' => $detail['qty'],
+                ];
+
+
+            }
+        }
+        
+
+        //     if (empty($listProducts)){
+        //         $listProducts[] = [
+        //             'id' => $best['id'],
+        //             'qty' => $best['qty']
+        //         ];
+
+        //     } else {
+
+        //         foreach ($listProducts as $keyb => $prod){
+                
+        //             // dump($best['id']);
+        //             // dump($prod);
+        //             if (in_array($best['id'], $prod)){
+        //                 $test = array_search($best['id'], $listProducts);
+        //             dump($test);
+        //             dump($listProducts);
+        //             dump($key);
+
+        //                 dump($best['id']);
+        //                 dump($prod);
+        //                 die;
+                        
+        //                 // dump($prod['id']);
+
+
+        //             $listProducts[$key]['qty'] += $best['qty'];
+        //             // dump($listProducts);
+        //             // die;
+
+        //             //     dump($prod);
+        //             // dump($best);
+        //                     // dump($listProducts[$key]['qty']);
+        //                 // $listProducts[$key]['qty'] += $best['qty'];
+        //             // die;
+        //             } else {
+                        
+        //                 $listProducts[] = $best;
+        //                 // dump($listProducts);
+        //                 // dump($listProducts);die;
+        //             }
+        //         // die;
+        //         }
+        //     }
+            
+            
+        // }
+
+        dump($bests);
+        dump($tests);
+        // dump($listProducts);
+        die;
+        $listProducts = [];
+        return $this->render('ThomasGameBundle:Product:menu.html.twig', array(
+        // 'listProducts' => $listProducts
+        ));
+    }
+
     public function settingAction()
     {
         $em = $this->getDoctrine()->getManager();

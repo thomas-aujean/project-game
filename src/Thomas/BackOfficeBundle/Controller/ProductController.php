@@ -129,7 +129,7 @@ class ProductController extends Controller
     $product = $em->getRepository('ThomasCoreBundle:Product')->find($id);
 
     if (null === $product) {
-      throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
+      throw new NotFoundHttpException("Le produit recheché n'existe pas.");
     }
 
     $form = $this->get('form.factory')->create(ProductType::class, $product);

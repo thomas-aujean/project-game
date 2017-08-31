@@ -48,8 +48,7 @@
         <ul class="nav nav-pills nav-stacked">
           <li><a href="{{ path('thomas_game_games') }}">Jeux Videos</a></li>
           <li><a href="{{ path('thomas_game_systems') }}">Consoles</a></li>
-          <li><a href="{{ path('thomas_game_access') }}">Accessoires</a></li>
-        
+          <li><a href="{{ path('thomas_game_access') }}">Accessoires</a></li>        
         </ul>
 
         {% block myfilter %}
@@ -82,7 +81,11 @@
     <hr>
 
     <footer>
-      <p>Thomas AUJEAN © {{ 'now'|date('Y') }}</p>
+      <p>Thomas AUJEAN © {{ 'now'|date('Y') }} - 
+        <a href="{{ path('thomas_game_ml') }}">Mentions Légales</a> - 
+        <a href="{{ path('thomas_game_cgv') }}">CGV</a> - 
+        <a href="{{ path('thomas_game_qsn') }}">Qui sommes nous</a>
+      </p>
     </footer>
   </div>
 

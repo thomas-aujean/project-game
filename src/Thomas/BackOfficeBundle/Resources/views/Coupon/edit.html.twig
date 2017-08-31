@@ -1,0 +1,22 @@
+{# src/Thomas/PlatformBundle/Resources/views/Advert/edit.html.twig #}
+
+{% extends "ThomasBackOfficeBundle::layout.html.twig" %}
+
+{% block title %}
+  Modifier un produit - {{ parent() }}
+{% endblock %}
+
+{% block thomasbo_body %}
+
+  <h2>Modifier une remise</h2>
+
+  {{ include("ThomasBackOfficeBundle:Product:form.html.twig") }}
+
+  <p>
+    <a href="{{ path('thomas_back_office_coupon_view', {'id': coupon.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à la remise
+    </a>
+  </p>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "ThomasBackOfficeBundle::layout.html.twig" %}
+
+{% block title %}
+  Back Office - {{ parent() }}
+{% endblock %}
+
+
+
+{% block thomasbo_body %}
+
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    {{ flashMessage }}
+{% endfor %}
+
+<h1>{{ coupon.name }}</h1>
+
+<div>{{ coupon.percent }} %</div>
+<div>
+
+<p>
+  <a href="{{ path('thomas_back_office_coupon_index') }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Retour à la liste
+  </a>
+  <a href="{{ path('thomas_back_office_coupon_edit', {'id': coupon.id}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-edit"></i>
+    Modifier la remise
+  </a>
+  <a href="{{ path('thomas_back_office_coupon_delete', {'id': coupon.id}) }}" class="btn btn-danger">
+    <i class="glyphicon glyphicon-trash"></i>
+    Supprimer la remise
+  </a>
+</p>
+{% endblock %}
