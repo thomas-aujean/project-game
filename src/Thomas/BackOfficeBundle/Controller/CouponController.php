@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Thomas\CoreBundle\Form\CouponType;
 use Thomas\BackOfficeBundle\Entity\Coupon;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CouponController extends Controller
 {

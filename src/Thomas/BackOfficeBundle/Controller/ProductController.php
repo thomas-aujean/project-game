@@ -7,6 +7,7 @@ use Thomas\CoreBundle\Form\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Thomas\BackOfficeBundle\Form\SearchType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 class ProductController extends Controller

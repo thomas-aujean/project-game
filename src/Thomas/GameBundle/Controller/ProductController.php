@@ -8,6 +8,7 @@ use Thomas\CoreBundle\Form\SystemSearchType;
 use Thomas\CoreBundle\Form\GameSearchType;
 use Thomas\CoreBundle\Form\SearchType;
 use Thomas\CoreBundle\Entity\Product;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends Controller
 {
