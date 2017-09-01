@@ -104,7 +104,7 @@ class Rate
      *
      * @return Rate
      */
-    public function setProduct(\Thomas\CoreBundle\Entity\Productr $product = null)
+    public function setProduct(\Thomas\CoreBundle\Entity\Product $product = null)
     {
         $this->product = $product;
 
@@ -114,7 +114,7 @@ class Rate
     /**
      * Get product
      *
-     * @return \Thomas\CoreBundle\Entity\Productr
+     * @return \Thomas\CoreBundle\Entity\Product
      */
     public function getProduct()
     {

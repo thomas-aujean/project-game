@@ -70,7 +70,6 @@ class ProductController extends Controller
                     ->getRepository('ThomasCoreBundle:Product')
                     ->findSystems($id)
                 ;
-
             }
         }
 
