@@ -180,74 +180,31 @@ class ProductController extends Controller
         foreach ($orders as $order) {
             $details = unserialize($order->getDetail());
             foreach ($details as  $key => $detail){
-                
                 $bests[] = [
-                    $detail['id'] => $detail['qty']
-                ];
-                $tests[] = [
                     'id' => $detail['id'],
                     'qty' => $detail['qty'],
                 ];
-
-
             }
         }
         
+        foreach($bests as $best){
+            if (empty($dabest)){
+                $dabest = [
+                    $best['id'] => $best['qty']
+                ];
 
-        //     if (empty($listProducts)){
-        //         $listProducts[] = [
-        //             'id' => $best['id'],
-        //             'qty' => $best['qty']
-        //         ];
-
-        //     } else {
-
-        //         foreach ($listProducts as $keyb => $prod){
-                
-        //             // dump($best['id']);
-        //             // dump($prod);
-        //             if (in_array($best['id'], $prod)){
-        //                 $test = array_search($best['id'], $listProducts);
-        //             dump($test);
-        //             dump($listProducts);
-        //             dump($key);
-
-        //                 dump($best['id']);
-        //                 dump($prod);
-        //                 die;
-                        
-        //                 // dump($prod['id']);
-
-
-        //             $listProducts[$key]['qty'] += $best['qty'];
-        //             // dump($listProducts);
-        //             // die;
-
-        //             //     dump($prod);
-        //             // dump($best);
-        //                     // dump($listProducts[$key]['qty']);
-        //                 // $listProducts[$key]['qty'] += $best['qty'];
-        //             // die;
-        //             } else {
-                        
-        //                 $listProducts[] = $best;
-        //                 // dump($listProducts);
-        //                 // dump($listProducts);die;
-        //             }
-        //         // die;
-        //         }
-        //     }
-            
-            
-        // }
-
-        dump($bests);
-        dump($tests);
-        // dump($listProducts);
-        die;
+            } else {
+                if(isset($dabest[$best['id']])){
+                    $dabest[$best['id']] = intval($dabest[$best['id']]) + intval($best['qty']);
+                } else{
+                    $dabest[$best['id']] = $best['qty'];
+                }
+            }           
+        }
+         dump($dabest);die;
         $listProducts = [];
-        return $this->render('ThomasGameBundle:Product:menu.html.twig', array(
-        // 'listProducts' => $listProducts
+        return $this->render('ThomasGameBundle:Product:best.html.twig', array(
+            'bests' => $dabest
         ));
     }
 
