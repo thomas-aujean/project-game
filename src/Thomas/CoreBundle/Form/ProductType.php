@@ -18,31 +18,39 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',       TextType::class)
-            ->add('price',      MoneyType::class)
+            ->add('name',       TextType::class, [
+                'label' => 'Nom'
+            ])
+            ->add('price',      MoneyType::class, [
+                'label' => 'Prix'
+            ])
             ->add('product_image',      ProductImageType::class) 
             ->add('product_category', EntityType::class, array(
                 'class'        => 'ThomasCoreBundle:ProductCategory',
                 'choice_label' => 'name',
                 'required'     => false,
+                'label'        => 'Catégorie',
             ))
             ->add('brand', EntityType::class, array(
                 'class'        => 'ThomasCoreBundle:Brand',
                 'choice_label' => 'name',
                 'multiple'     => false,
                 'required'     => false,
+                'label'        => 'Marque'
             ))
             ->add('editor', EntityType::class, array(
                 'class'        => 'ThomasCoreBundle:Editor',
                 'choice_label' => 'name',
                 'multiple'     => false,
                 'required'     => false,
+                'label'        => 'Editeur'
             ))
             ->add('system', EntityType::class, array(
                 'class'        => 'ThomasCoreBundle:System',
                 'choice_label' => 'name',
                 'multiple'     => false,
                 'required'     => false,
+                'label'        => 'Console'
             ))
             ->add('save',       SubmitType::class);
         ;

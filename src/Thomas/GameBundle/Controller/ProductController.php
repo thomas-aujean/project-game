@@ -188,6 +188,7 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $orders = $em->getRepository('ThomasCoreBundle:MyOrder')->findAll();
+        $bests[] = '';
         foreach ($orders as $order) {
             $details = unserialize($order->getDetail());
             foreach ($details as  $key => $detail){
