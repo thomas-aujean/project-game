@@ -188,36 +188,41 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $orders = $em->getRepository('ThomasCoreBundle:MyOrder')->findAll();
-        $bests[] = '';
-        foreach ($orders as $order) {
-            $details = unserialize($order->getDetail());
-            foreach ($details as  $key => $detail){
-                $bests[] = [
-                    'id' => $detail['id'],
-                    'qty' => $detail['qty'],
-                ];
-            }
-        }
-        
-        foreach($bests as $best){
-            if (empty($dabest)){
-                $dabest = [
-                    $best['id'] => $best['qty']
-                ];
+        if ($orders){
 
-            } else {
-                if(isset($dabest[$best['id']])){
-                    $dabest[$best['id']] = intval($dabest[$best['id']]) + intval($best['qty']);
-                } else{
-                    $dabest[$best['id']] = $best['qty'];
+            foreach ($orders as $order) {
+                $details = unserialize($order->getDetail());
+                foreach ($details as  $key => $detail){
+                    $bests[] = [
+                        'id' => $detail['id'],
+                        'qty' => $detail['qty'],
+                    ];
                 }
-            }           
+            }
+            
+            foreach($bests as $best){
+                if (empty($dabest)){
+                    $dabest = [
+                        $best['id'] => $best['qty']
+                    ];
+    
+                } else {
+                    if(isset($dabest[$best['id']])){
+                        $dabest[$best['id']] = intval($dabest[$best['id']]) + intval($best['qty']);
+                    } else{
+                        $dabest[$best['id']] = $best['qty'];
+                    }
+                }           
+            }
+            arsort($dabest);
+            $arrayKeys = array_keys($dabest);
+            $product = $em->getRepository('ThomasCoreBundle:Product')->find($arrayKeys[0]);
+            $product2 = $em->getRepository('ThomasCoreBundle:Product')->find($arrayKeys[1]);
+            $product3 = $em->getRepository('ThomasCoreBundle:Product')->find($arrayKeys[2]);
+        } else {
+
+            $product =$product2 = $product3 ='';
         }
-        arsort($dabest);
-        $arrayKeys = array_keys($dabest);
-        $product = $em->getRepository('ThomasCoreBundle:Product')->find($arrayKeys[0]);
-        $product2 = $em->getRepository('ThomasCoreBundle:Product')->find($arrayKeys[1]);
-        $product3 = $em->getRepository('ThomasCoreBundle:Product')->find($arrayKeys[2]);
         
         return $this->render('ThomasGameBundle:Product:best.html.twig', array(
             'product' => $product,

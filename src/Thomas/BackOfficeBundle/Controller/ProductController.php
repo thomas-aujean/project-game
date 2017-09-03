@@ -148,7 +148,7 @@ class ProductController extends Controller
       $em = $this->getDoctrine()->getManager();
       $em->persist($product);
       $em->flush();
-      $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
+      $request->getSession()->getFlashBag()->add('notice', 'Produit bien modifié.');
 
       return $this->redirectToRoute('thomas_back_office_product_view', array('id' => $product->getId()));
     }
