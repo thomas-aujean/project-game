@@ -124,7 +124,7 @@ class ProductController extends Controller
             throw $this->createNotFoundException("La page ".$page." n'existe pas.");
         }
         
-        return $this->render('ThomasGameBundle:Product:gameIndex.html.twig', array(
+        return $this->render('ThomasGameBundle:Product:gameindex.html.twig', array(
             'listGames' => $listGames,
             'form' => $form->createView(),
             'nbPages'     => $nbPages,

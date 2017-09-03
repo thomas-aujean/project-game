@@ -52,7 +52,7 @@ class ProductType extends AbstractType
                 'required'     => false,
                 'label'        => 'Console'
             ))
-            ->add('save',       SubmitType::class);
+            ->add('Sauvegarder',       SubmitType::class);
         ;
     }
     
