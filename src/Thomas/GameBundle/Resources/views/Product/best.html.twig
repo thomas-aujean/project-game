@@ -1,6 +1,8 @@
 
 
 <div class="row">
+
+    {% if product != '' %}
     <div class="col-xs-12 col-sm-6  col-md-4">
       <div class="product-box">
         <a href="{{ path('thomas_game_view', {'id': product.id}) }}">
@@ -18,6 +20,8 @@
         </div>
       </div>
     </div>
+    {% endif %}
+    {% if product2 != '' %}
     <div class="col-xs-12 col-sm-6  col-md-4">
       <div class="product-box">
         <a href="{{ path('thomas_game_view', {'id': product2.id}) }}">
@@ -35,6 +39,8 @@
         </div>
       </div>
     </div>
+    {% endif %}
+    {% if product3 != '' %}
     <div class="col-xs-12 col-sm-6  col-md-4">
       <div class="product-box">
         <a href="{{ path('thomas_game_view', {'id': product3.id}) }}">
@@ -53,4 +59,5 @@
         </div>
       </div>
     </div>
+    {% endif %}
 </div>
