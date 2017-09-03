@@ -1,0 +1,32 @@
+{% extends "ThomasGameBundle::layout.html.twig" %}
+{% block title %}
+  La base - {{ parent() }}
+{% endblock %}
+
+
+
+{% block thomasgame_body %}
+
+<h1 class="monh3">Liste des commandes</h1>
+
+<table class="table" style="width:100%">
+  <tr>
+    <th>Référence</th>
+    <th>Date</th>
+    <th>Montant</th>
+  </tr>
+  {% for order in orders %}
+    <tr>
+      <td><a href="{{ path('thomas_game_user_order', {'id': order.id}) }}">{{ order.id }}</td>
+
+
+      <td>{{ order.created|date("m/d/Y") }}</td>
+      <td>{{ order.amount }} €</td>
+
+    </tr>
+  {% endfor %}
+  
+</table>
+
+
+{% endblock %}

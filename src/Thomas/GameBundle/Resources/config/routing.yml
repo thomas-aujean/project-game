@@ -67,6 +67,18 @@ thomas_game_view:
 
 
 
+thomas_game_user_order:
+    path:     /ma-commande/{id}
+    defaults: { _controller: ThomasGameBundle:Page:myorder }
+
+thomas_game_user_orders:
+    path:     /mes-commandes
+    defaults: { _controller: ThomasGameBundle:Page:myorders }
+
+thomas_game_user:
+    path:     /profile
+    defaults: { _controller: ThomasGameBundle:Page:profile }
+
 thomas_game_qsn:
     path:     /qui-sommes-nous
     defaults: { _controller: ThomasGameBundle:Page:qsn }

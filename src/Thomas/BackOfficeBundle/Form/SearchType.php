@@ -43,7 +43,7 @@ class SearchType extends AbstractType
                 'label'        => 'Console'
             ))
 
-            ->add('search',       SubmitType::class);
+            ->add('Rechercher',       SubmitType::class);
         ;
     }
     

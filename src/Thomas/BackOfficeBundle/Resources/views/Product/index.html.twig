@@ -4,18 +4,20 @@
   Back Office- {{ parent() }}
 {% endblock %}
 
-
+{% block myfilter %}
+{{ include("ThomasBackOfficeBundle:Product:form.html.twig") }}
+{% endblock %}
 {% block thomasbo_body %}
 
 {% for flashMessage in app.session.flashbag.get('info') %}
     {{ flashMessage }}
 {% endfor %}
 
-{{ include("ThomasBackOfficeBundle:Product:form.html.twig") }}
 
-<h1>Liste des produits</h1>
 
-<table style="width:100%">
+<h1 class="monh3">Liste des produits</h1>
+
+<table class="table" style="width:100%">
   <tr>
     <th>Id</th>
     <th>Nom du produit</th> 

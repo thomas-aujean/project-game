@@ -1,0 +1,22 @@
+{% extends "ThomasGameBundle::layout.html.twig" %}
+{% block title %}
+  La base - {{ parent() }}
+{% endblock %}
+
+
+
+{% block thomasgame_body %}
+
+<h2 class="monh3">Mon profil</h2>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        <a href="{{ path('thomas_game_user_orders') }}">Voir mes commandes</a>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <a href="{{ path('fos_user_profile_edit') }}">Modifier mon compte</a>
+    </div>
+
+</div>
+
+{% endblock %}

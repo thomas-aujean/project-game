@@ -17,11 +17,11 @@ class SettingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mail',       TextType::class)
-            ->add('phone',      TextType::class)
-            ->add('address',    TextType::class)
-            ->add('image',      ProductImageType::class) 
-            ->add('save',       SubmitType::class);
+            ->add('mail',       TextType::class, array('label' => 'Adresse mail'))
+            ->add('phone',      TextType::class, array('label' => 'Numéro de téléphone'))
+            ->add('address',    TextType::class, array('label' => 'Adresse'))
+            ->add('image',      ProductImageType::class, array('label' => 'Logo')) 
+            ->add('Sauvegarder',       SubmitType::class);
         ;
     }
     

@@ -11,6 +11,7 @@
     {% block stylesheets %}
       {# On charge le CSS de bootstrap depuis le site directement #}
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="{{ asset('css/style.css') }}">
       <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     {% endblock %}
@@ -18,35 +19,51 @@
 
   <body>
   <div class="container">
-    <div id="header" class="jumbotron">
-      <h1>Project Games - Back Office</h1>
 
-    </div>
+    <header>
+      <div class="row">
+       <div class="col-xs-12 col-md-9 col-md-push-3">
+          <div class="logo">
+            {{ render(controller("ThomasGameBundle:Product:setting")) }}
+            <p>
+              Retrouvez vos anciennes consoles et vieux jeux vidéos
+            </p>
+          </div> 
+        </div>
+        <div class="col-xs-12 col-md-3 col-md-pull-9">
+          <div class="connexion">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                Connecté en tant que <a href="{{ path('fos_user_profile_edit') }}">{{ app.user.username }}</a>
+                -
+                <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+
+                <p>Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
+            {% endif %}
+            <p>Voir mon <a href="{{ path('thomas_game_cart') }}">panier</a></p>
+          </div> 
+          <h2>BACK OFFICE</h2>
+        </div>
+      </div>
+    </header>
+
 
     <div class="row">
-
       <div id="menu" class="col-md-3">
-
-{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-    Connecté en tant que {{ app.user.username }}
-    -
-    <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
-{% else %}
-    <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-{% endif %}
-
-        <h3>Gestion du site</h3>
-        <ul class="nav nav-pills nav-stacked">
+        <ul class="nav nav-pills nav-stacked ma-nav">
           {% if is_granted('ROLE_ADMIN') %}
-            <li><a href="{{ path('thomas_back_office_product_index') }}">Les produits</a></li>
-            <li><a href="{{ path('thomas_back_office_users') }}">Les utilisateurs</a></li>
-            <li><a href="{{ path('thomas_back_office_orders') }}">Les commandes</a></li>
-            <li><a href="{{ path('thomas_back_office_coupon_index') }}">Les remises</a></li>
-            <li><a href="{{ path('thomas_back_office_settings') }}">Les parametres</a></li>
+            <li class="vert"><a href="{{ path('thomas_back_office_product_index') }}">Les produits</a></li>
+            <li class="rouge"><a href="{{ path('thomas_back_office_users') }}">Les utilisateurs</a></li>
+            <li class="jaune"><a href="{{ path('thomas_back_office_orders') }}">Les commandes</a></li>
+            <li class="bleu"><a href="{{ path('thomas_back_office_coupon_index') }}">Les remises</a></li>
+            <li class="gris"><a href="{{ path('thomas_back_office_settings') }}">Les parametres</a></li>
           {% endif %}
+          {% block myfilter %}
+          {% endblock %}
           <hr>
-          <li><a href="{{ path('thomas_core_home') }}">Retour au site</a></li>
         </ul>
+          <a href="{{ path('thomas_core_home') }}">Retour au site</a>
       </div>
       <div id="content" class="col-md-9">
         {% block body %}

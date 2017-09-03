@@ -10,13 +10,13 @@
   {% for flashMessage in app.session.flashbag.get('notice') %}
     {{ flashMessage }}
   {% endfor %}
-  <h3>Derniers produits ajoutés</h3>
-  {{ render(controller("ThomasGameBundle:Product:menu", {'limit': 3})) }}
-  <h3>Meilleures ventes</h3>
+  <h3 class="monh3">Meilleures ventes</h3>
   {{ render(controller("ThomasGameBundle:Product:best", {'limit': 3})) }}
-  <p>
-    {# Ici, on devrait utiliser un contrôleur d'un éventuel ForumBundle pour afficher les derniers posts sur le forum,
-       ce n'est pas le sujet ici #}
-  </p>
+
+  <div class="last"> 
+    <h3 class="monh3">Derniers produits ajoutés</h3>
+    {{ render(controller("ThomasGameBundle:Product:menu", {'limit': 3})) }}
+  </div>
+  
 
 {% endblock %}

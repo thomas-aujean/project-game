@@ -5,35 +5,35 @@
 
 
 {% block thomasgame_body %}
-<h1>Nos accessoires</h1>
+<h3 class="monh3">Les accessoires</h3>
+  <div class="row">
+    {% for product in listAccess %}
+
+
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="product-box">
+          <a href="{{ path('thomas_game_view', {'id': product.id}) }}">
+            <div class="product-image">
+              {% if product.productImage is not null %} 
+                  <img src="{{ asset(product.productImage.webPath) }}" alt="{{ product.productImage.alt }}" style="width:100%;max-height:200px"/>
+              {% endif %}
+            </div>
+            <div class="product-name">
+              {{ product.name }}  {{ product.price }} €
+            </div>
+            </a>
+          <div class="product-add">
+            
+            <a href="{{ path('thomas_game_add', {'id': product.id}) }}" class="btn btn-success">Ajouter au panier</a>
+          </div>
+        </div>
+      </div>
+
+    {% endfor %}
+  </div>
 
 
 
-  {% for product in listAccess %}
-
-
-    <div class="col-md-3">
-    <a href="{{ path('thomas_game_view', {'id': product.id}) }}">
-          {% if product.productImage is not null %}
-          <img src="{{ asset(product.productImage.webPath) }}" alt="{{ product.productImage.alt }}" style="width:100%;max-height:200px"/>
-          {% endif %}
-       
-      {{ product.name }} - {{ product.price }} €
-    </a>
-      {% if product.productCategory is not null %}
-        <div>Catégorie - {{ product.productCategory.name }}</div>
-      {% endif %}
-
-      {% if product.system is not null %}
-        <div>Console - {{ product.system.name }}</div>
-      {% endif %}
-
-      <a href="{{ path('thomas_game_add', {'id': product.id}) }}">Ajouter au panier</a>
-    </div>
-
-
-
-  {% endfor %}
 
 {% endblock %}
 

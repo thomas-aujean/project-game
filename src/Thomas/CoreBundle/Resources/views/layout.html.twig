@@ -10,7 +10,9 @@
 
     {% block stylesheets %}
       {# On charge le CSS de bootstrap depuis le site directement #}
+      <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="{{ asset('css/style.css') }}">
       
     {% endblock %}
@@ -18,52 +20,53 @@
 
   <body>
   <div class="container">
-    <div id="header" class="jumbotron">
-      {# {% if setting.image is not null %} #}
-        {# <img src="{{ asset(setting.image.webPath) }}" alt="{{ setting.image.alt }}"/> #}
-      {# {% endif %} #}
-      {{ render(controller("ThomasGameBundle:Product:setting")) }}
-      <p>
-        Retrouvez vos anciennes consoles et vieux jeux vidéos
-      </p>
+    <header>
+      <div class="row">
+       <div class="col-xs-12 col-md-9 col-md-push-3">
+          <div class="logo">
+            {{ render(controller("ThomasGameBundle:Product:setting")) }}
+            <p>
+              Retrouvez vos anciennes consoles et vieux jeux vidéos
+            </p>
+          </div> 
+        </div>
+        <div class="col-xs-12 col-md-3 col-md-pull-9">
+          <div class="connexion">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {# Connecté en tant que <a href="{{ path('fos_user_profile_edit') }}">{{ app.user.username }}</a> #}
+                Connecté en tant que <a href="{{ path('thomas_game_user') }}">{{ app.user.username }}</a>
+                -
+                <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+
+                <p>Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
+            {% endif %}
+            <p>Voir mon <a href="{{ path('thomas_game_cart') }}">panier</a></p>
+          </div> 
+        </div>
+        
+      </div>
       
-    </div>
+      
+    </header>
 
     <div class="row">
         {% block search %}
         {% endblock %}
       <div id="menu" class="col-md-3">
 
-{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-    Connecté en tant que <a href="{{ path('fos_user_profile_edit') }}">{{ app.user.username }}</a>
-    -
-    <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
-{% else %}
-    <a href="{{ path('fos_user_security_login') }}">Connexion</a>
 
-    <p>Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
-{% endif %}
-<p>Voir mon <a href="{{ path('thomas_game_cart') }}">panier</a></p>
         
-        <ul class="nav nav-pills nav-stacked">
-          <li><a href="{{ path('thomas_game_games') }}">Jeux Videos</a></li>
-          <li><a href="{{ path('thomas_game_systems') }}">Consoles</a></li>
-          <li><a href="{{ path('thomas_game_access') }}">Accessoires</a></li>        
+        <ul class="nav nav-pills nav-stacked ma-nav">
+          <li class="vert"><a href="{{ path('thomas_game_games') }}">Jeux Videos</a></li>
+          <li class="jaune"><a href="{{ path('thomas_game_systems') }}">Consoles</a></li>
+          <li class="bleu"><a href="{{ path('thomas_game_access') }}">Accessoires</a></li>        
         </ul>
 
         {% block myfilter %}
         {% endblock %}
-        {# <h3>Les annonces</h3>
-        <ul class="nav nav-pills nav-stacked">
-          <li><a href="{{ path('thomas_platform_home') }}">Accueil</a></li>
-          {% if is_granted('ROLE_USER') %}
-            <li><a href="{{ path('thomas_platform_add') }}">Ajouter une annonce</a></li>
-          {% endif %}
-        </ul> #}
-
-        {# <h4>Dernières annonces</h4>
-        {{ render(controller("ThomasPlatformBundle:Advert:menu", {'limit': 3})) }} #}
-        
+       
         
         <hr>
         {% if is_granted('ROLE_ADMIN') %}
@@ -73,8 +76,10 @@
 
       </div>
       <div id="content" class="col-md-9">
-        {% block body %}
-        {% endblock %}
+        <div class="mycontent">   
+          {% block body %}
+          {% endblock %}
+        </div>
       </div>
     </div>
 

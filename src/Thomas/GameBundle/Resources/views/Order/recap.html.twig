@@ -11,7 +11,7 @@
 {% if total == 0 %}
     Votre panier est vide =(
 {% else %}
-    <table>
+    <table class="table cart">
       <tr>
         <td>Id</td>
         <td>Nom</div>
@@ -36,7 +36,7 @@
 
 {% if app.session.get('coupon') %}
   <div>
-    Avec réduction de {{ app.session.get('coupon') }} %
+    Avec réduction de {{ app.session.get('coupon') }} %, soit {{  subs }} €
   </div>
   <div>
     Nouveau total {{ total - subs }} €
@@ -44,38 +44,47 @@
 
 {% endif %}
 
-<h3>Mes infos</h3>
-<div>
-  <div>
-    Nom - {{ app.user.username }}
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+  
+    <h3>Mes infos</h3>
+    <div>
+      <div>
+        Nom - {{ app.user.username }}
+      </div>
+      <div>
+        Adresse - {{ app.user.address }}
+      </div>
+      <div>
+        Code postal - {{ app.user.zipcode }}
+      </div>
+      <div>
+        Ville - {{ app.user.city }}
+      </div>
+    </div>
   </div>
-  <div>
-    Adresse - {{ app.user.address }}
+  <div class="col-xs-12 col-sm-6">
+  {% if app.session.get('coupon') %}
+        {% else %}
+          <h3>Vous avez un code promo ?</h3>
+          {{ include("ThomasBackOfficeBundle:Product:form.html.twig") }}
+        {% endif %}
   </div>
-  <div>
-    Code postal - {{ app.user.zipcode }}
-  </div>
-  <div>
-    Ville - {{ app.user.city }}
-  </div>
-
 </div>
 
-  <div>
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <div>
+      {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
-    {% if app.session.get('coupon') %}
-    {% else %}
-      <h3>Vous avez un code promo ?</h3>
-      {{ include("ThomasBackOfficeBundle:Product:form.html.twig") }}
-    {% endif %}
-    <a href="{{ path('thomas_game_valid') }}">Valider ma commande</a>
-    {% else %}
-    Vous devez être enregistré pour passer commande
-        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-        <p>Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
-    {% endif %}
-  </div>
+        
+          <a href="{{ path('thomas_game_valid') }}">Valider ma commande</a>
+      {% else %}
+        Vous devez être enregistré pour passer commande
+          <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+          <p>Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
+      {% endif %}
+    </div>
+
+
 
 {% endif %}
 

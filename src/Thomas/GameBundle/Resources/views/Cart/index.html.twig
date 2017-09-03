@@ -10,7 +10,7 @@
 {% if total == 0 %}
     Votre panier est vide =(
 {% else %}
-    <table>
+    <table class="table cart">
       <tr>
         <td>Id</td>
         <td>Nom</div>
@@ -25,27 +25,31 @@
         <td>{{ item.id }}</td>
         <td>{{ item.name }}</div>
         <td>
-          <a href="{{ path('thomas_game_remove_qty', {'id': key}) }}">-</a>         
-          {{ item.qty }}
-          <a href="{{ path('thomas_game_add_qty', {'id': key}) }}">+</a>
+          <a href="{{ path('thomas_game_remove_qty', {'id': key}) }}"><i class="fa fa-minus" aria-hidden="true"></i></a>         
+          <span class="qty">{{ item.qty }}</span>
+          <a href="{{ path('thomas_game_add_qty', {'id': key}) }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
         </div>
         <td>{{ item.unitPrice }} €</td>
         <td>{{ item.price }} €</td>
-        <td><a href="{{ path('thomas_game_delete', {'id': key}) }}">Supprimer ligne</a></td>
+        <td><a href="{{ path('thomas_game_delete', {'id': key}) }}"><i class="fa fa-times" aria-hidden="true"></i></a></td>
       </tr>
       {% endfor %}
-  </table>  
+    </table>  
 
-  total : {{ total }} €
+
+    
+  <div class="cart-total">
+    total : {{ total }} €
+  </div>
   <div>
-    <a href="{{ path('thomas_game_remove') }}">Vider le panier</a>
+    <a href="{{ path('thomas_game_remove') }}"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Vider le panier</a>
   </div>
   
-  <div>
+  <div class="cart-valid">
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
 
-    <a href="{{ path('thomas_game_order') }}">Passer commande</a>
+    <a href="{{ path('thomas_game_order') }}" class="btn btn-success">Passer commande</a>
     {% else %}
     Vous devez être enregistré pour passer commande
         <a href="{{ path('fos_user_security_login') }}">Connexion</a>

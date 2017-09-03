@@ -1,0 +1,56 @@
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6  col-md-4">
+      <div class="product-box">
+        <a href="{{ path('thomas_game_view', {'id': product.id}) }}">
+          <div class="product-image">
+            {% if product.productImage is not null %} 
+                <img src="{{ asset(product.productImage.webPath) }}" alt="{{ product.productImage.alt }}" style="width:100%;max-height:200px"/>
+            {% endif %}
+          </div>
+          <div class="product-name">
+            {{ product.name }} {{ product.price }} €
+          </div>
+          </a>
+        <div class="product-add">
+          <a href="{{ path('thomas_game_add', {'id': product.id}) }}" class="btn btn-success">Ajouter au panier</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6  col-md-4">
+      <div class="product-box">
+        <a href="{{ path('thomas_game_view', {'id': product2.id}) }}">
+          <div class="product-image">
+            {% if product2.productImage is not null %} 
+                <img src="{{ asset(product2.productImage.webPath) }}" alt="{{ product2.productImage.alt }}" style="width:100%;max-height:200px"/>
+            {% endif %}
+          </div>
+          <div class="product-name">
+            {{ product2.name }} {{ product2.price }} €
+          </div>
+          </a>
+        <div class="product-add">
+          <a href="{{ path('thomas_game_add', {'id': product2.id}) }}" class="btn btn-success">Ajouter au panier</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6  col-md-4">
+      <div class="product-box">
+        <a href="{{ path('thomas_game_view', {'id': product3.id}) }}">
+          <div class="product-image">
+            {% if product3.productImage is not null %} 
+                <img src="{{ asset(product3.productImage.webPath) }}" alt="{{ product3.productImage.alt }}" style="width:100%;max-height:200px"/>
+            {% endif %}
+          </div>
+          <div class="product-name">
+            {{ product3.name }} {{ product3.price }} €
+          </div>
+          </a>
+        <div class="product-add">
+          
+          <a href="{{ path('thomas_game_add', {'id': product3.id}) }}" class="btn btn-success">Ajouter au panier</a>
+        </div>
+      </div>
+    </div>
+</div>

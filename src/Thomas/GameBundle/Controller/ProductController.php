@@ -201,10 +201,16 @@ class ProductController extends Controller
                 }
             }           
         }
-         dump($dabest);die;
-        $listProducts = [];
+        arsort($dabest);
+        $arrayKeys = array_keys($dabest);
+        $product = $em->getRepository('ThomasCoreBundle:Product')->find($arrayKeys[0]);
+        $product2 = $em->getRepository('ThomasCoreBundle:Product')->find($arrayKeys[1]);
+        $product3 = $em->getRepository('ThomasCoreBundle:Product')->find($arrayKeys[2]);
+        
         return $this->render('ThomasGameBundle:Product:best.html.twig', array(
-            'bests' => $dabest
+            'product' => $product,
+            'product2' => $product2,
+            'product3' => $product3,
         ));
     }
 
@@ -245,16 +251,19 @@ class ProductController extends Controller
     }
 
 
-    public function suggestionAction($filter, $limit)
+    public function suggestionAction($filter, $id, $limit)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $listProducts = $em->getRepository('ThomasCoreBundle:Product')->findBy(
-        array('system'=> $filter),                 // Pas de critère
-        array('id' => 'desc'), // On trie par date décroissante
-        $limit,                  // On sélectionne $limit annonces
-        0                        // À partir du premier
-        );
+        // $listProducts = $em->getRepository('ThomasCoreBundle:Product')->findBy(
+        // array('system'=> $filter),                 // Pas de critère
+        // array('id' => 'desc'), // On trie par date décroissante
+        // $limit,                  // On sélectionne $limit annonces
+        // 0                        // À partir du premier
+        // );
+
+        $listProducts = $em->getRepository('ThomasCoreBundle:Product')->findSuggestions($filter, $id, $limit);
+
 
         return $this->render('ThomasGameBundle:Product:suggestion.html.twig', array(
         'listProducts' => $listProducts

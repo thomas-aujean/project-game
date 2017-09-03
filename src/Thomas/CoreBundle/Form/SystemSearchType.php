@@ -31,7 +31,7 @@ class SystemSearchType extends AbstractType
                 'label'        => 'Marque'
             ))
 
-            ->add('search',       SubmitType::class);
+            ->add('Rechercher',       SubmitType::class);
         ;
     }
     

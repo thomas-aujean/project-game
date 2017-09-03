@@ -95,6 +95,24 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
         ;
     }
 
+    public function findSuggestions($filter = null, $id = null, $limit = null)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->where('p.system = :filter')
+            ->setParameter('filter', $filter)
+            ->andWhere('p.id != :id')
+            ->setParameter('id', $id)
+            ->setMaxResults($limit)
+        ;
+
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findAccess()
     {
         $qb = $this->createQueryBuilder('p');

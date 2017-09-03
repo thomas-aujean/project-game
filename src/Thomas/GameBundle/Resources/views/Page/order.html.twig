@@ -1,16 +1,11 @@
-{% extends "ThomasBackOfficeBundle::layout.html.twig" %}
-
+{% extends "ThomasGameBundle::layout.html.twig" %}
 {% block title %}
-  Back Office- {{ parent() }}
+  La base - {{ parent() }}
 {% endblock %}
 
 
-{% block thomasbo_body %}
 
-{% for flashMessage in app.session.flashbag.get('info') %}
-    {{ flashMessage }}
-{% endfor %}
-
+{% block thomasgame_body %}
 
 <h1 class="monh3">Commande n° {{ order.id }} passée le {{ order.created|date("m/d/Y") }}</h1>
     <table class="table">
@@ -38,11 +33,7 @@
 <div>Remise : {{ order.coupon }} %</div>
 <div>Total : {{ order.amount }}</div>
 
-<h4>Client  {{ order.user }} </h4>
 
-<a href="{{ path('thomas_back_office_orders') }}" class="btn btn-default">
-    <i class="glyphicon glyphicon-chevron-left"></i>
-    Retour à la liste
-  </a>
+
 
 {% endblock %}
