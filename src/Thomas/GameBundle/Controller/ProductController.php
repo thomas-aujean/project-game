@@ -82,7 +82,7 @@ class ProductController extends Controller
         ));
     }
 
-    public function gameIndexAction(Request $request, $page)
+    public function gameIndexAction(Request $request, $page, $console = null, $name = null)
     {
         if ($page < 1) {
             throw $this->createNotFoundException("La page ".$page." n'existe pas.");
@@ -92,7 +92,7 @@ class ProductController extends Controller
         $listGames = $this->getDoctrine()
             ->getManager()
             ->getRepository('ThomasCoreBundle:Product')
-            ->findGames($page, $nbPerPage)
+            ->findGames($page, $nbPerPage, $console, $name)
         ;
 
         $product = new Product();
@@ -129,6 +129,8 @@ class ProductController extends Controller
             'form' => $form->createView(),
             'nbPages'     => $nbPages,
             'page'        => $page,
+            'console'        => $console,
+            'name'        => $name,
         ));
     }
 

@@ -60,6 +60,10 @@ thomas_back_office_orders:
     path:     orders
     defaults: { _controller: ThomasBackOfficeBundle:Order:index }
 
+thomas_back_office_pdf:
+    path:     pdf/{id}
+    defaults: { _controller: ThomasBackOfficeBundle:Order:pdf }
+
 thomas_back_office_order_view:
     path:     order/{id}
     defaults: { _controller: ThomasBackOfficeBundle:Order:view }

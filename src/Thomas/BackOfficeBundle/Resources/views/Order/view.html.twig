@@ -41,8 +41,14 @@
 <h4>Client  {{ order.user }} </h4>
 
 <a href="{{ path('thomas_back_office_orders') }}" class="btn btn-default">
-    <i class="glyphicon glyphicon-chevron-left"></i>
-    Retour à la liste
-  </a>
+  <i class="glyphicon glyphicon-chevron-left"></i>
+  Retour à la liste
+</a>
+
+
+<a href="{{ path('thomas_back_office_pdf', {'id': order.id}) }}" class="btn btn-default">
+  <i class="glyphicon glyphicon-chevron-left"></i>
+  PDF
+</a>
 
 {% endblock %}

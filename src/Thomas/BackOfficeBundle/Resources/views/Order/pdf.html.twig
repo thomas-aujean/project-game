@@ -1,0 +1,15 @@
+<img src="uploads\img\logo.png" style="height:200px;width:200px">
+<h1 class="monh3">Commande n° {{ order.id }} passée le {{ order.created|date("m/d/Y") }}</h1>
+    
+      {% for item in cart %}
+ 
+      
+        {{ item.id }}
+        {{ item.name }}
+  
+      {% endfor %}
+
+<div>Remise : {{ order.coupon }} %</div>
+<div>Total : {{ order.amount }}</div>
+
+<h4>Client  {{ order.user }} </h4>
