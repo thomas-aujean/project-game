@@ -5,7 +5,7 @@ thomas_back_office_homepage:
 # PRODUITS
 
 thomas_back_office_product_index:
-    path:     products
+    path:     products/{page}
     defaults: { _controller: ThomasBackOfficeBundle:Product:index }
 
 thomas_back_office_product_view:

@@ -82,12 +82,17 @@ class ProductController extends Controller
         ));
     }
 
-    public function gameIndexAction(Request $request)
+    public function gameIndexAction(Request $request, $page)
     {
+        if ($page < 1) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
+        $nbPerPage = 12;
+
         $listGames = $this->getDoctrine()
             ->getManager()
             ->getRepository('ThomasCoreBundle:Product')
-            ->findGames()
+            ->findGames($page, $nbPerPage)
         ;
 
         $product = new Product();
@@ -108,16 +113,22 @@ class ProductController extends Controller
                 
                 $listGames = $this->getDoctrine()->getManager()
                     ->getRepository('ThomasCoreBundle:Product')
-                    ->findGames($console, $name)
+                    ->findGames($page, $nbPerPage, $console, $name)
                 ;
 
             }
         }
+        $nbPages = ceil(count($listGames) / $nbPerPage);
 
-
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
+        
         return $this->render('ThomasGameBundle:Product:gameIndex.html.twig', array(
             'listGames' => $listGames,
             'form' => $form->createView(),
+            'nbPages'     => $nbPages,
+            'page'        => $page,
         ));
     }
 

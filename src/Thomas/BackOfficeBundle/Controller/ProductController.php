@@ -12,15 +12,21 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends Controller
 {
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, $page)
     {
+
+        if ($page < 1) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
+        $nbPerPage = 10;
+
         $repository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('ThomasCoreBundle:Product')
         ;
 
-        $listProducts = $repository->findAll();
+        $listProducts = $repository->findProducts($page, $nbPerPage);
 
         $product = new Product();
         $form   = $this->get('form.factory')->create(SearchType::class, $product);
@@ -61,17 +67,19 @@ class ProductController extends Controller
 
                 $listProducts = $this->getDoctrine()->getManager()
                     ->getRepository('ThomasCoreBundle:Product')
-                    ->findProducts($category, $brand, $system, $name)
+                    ->findProducts($page, $nbPerPage, $category, $brand, $system, $name)
                 ;
 
             }
         }
-
+        $nbPages = ceil(count($listProducts) / $nbPerPage);
         
 
         return $this->render('ThomasBackOfficeBundle:Product:index.html.twig', array(
             'form' => $form->createView(),
-            'products' => $listProducts
+            'products' => $listProducts,
+            'nbPages'     => $nbPages,
+            'page'        => $page,
         ));
     }
 

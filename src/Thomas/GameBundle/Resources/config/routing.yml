@@ -50,7 +50,7 @@ thomas_game_systems:
     defaults: { _controller: ThomasGameBundle:Product:systemIndex }
 
 thomas_game_games:
-    path:     /jeux
+    path:     /jeux/{page}
     defaults: { _controller: ThomasGameBundle:Product:gameIndex }
 
 thomas_game_access:

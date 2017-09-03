@@ -39,6 +39,10 @@ body{
 
                                                 /* NAVIGATION */
 
+.nav>li>a:hover, .nav>li>a:focus {
+    text-decoration: none;
+    background-color: #323232;
+}
 .ma-nav{
     
     border-radius: 5px;
@@ -53,6 +57,9 @@ body{
 .ma-nav li a{
     color: white;
     font-size: 22px
+}
+.ma-nav li a:hover{
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -125,6 +132,28 @@ header{
 
 .product-add{
     text-align: right;
+}
+
+                                                /* ESPACE CLIENT */
+
+.link-box{
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.big-link{
+    border-radius: 5px;
+    padding: 20px;
+    color: white;
+    text-transform: uppercase;
+    font-size: 20px;
+    transition: .1s;
+}
+
+.big-link:hover{
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    color: white;
 }
 
                                                 /* PANIER */

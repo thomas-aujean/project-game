@@ -2,6 +2,9 @@
 
 namespace Thomas\CoreBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * ProductRepository
  *
@@ -11,7 +14,7 @@ namespace Thomas\CoreBundle\Repository;
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function findProducts($category = null, $brand = null, $system = null, $name = null)
+    public function findProducts($page, $nbPerPage, $category = null, $brand = null, $system = null, $name = null)
     {
 
 
@@ -43,13 +46,16 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
             ;
         }
 
-        return $qb
-            ->getQuery()
-            ->getResult()
+        $qb
+            ->setFirstResult(($page-1) * $nbPerPage)
+            ->setMaxResults($nbPerPage)
         ;
+        $qb->getQuery();
+
+        return new Paginator($qb, true);
     }
 
-    public function findGames($system = null, $name = null)
+    public function findGames($page, $nbPerPage, $system = null, $name = null)
     {
         $qb = $this->createQueryBuilder('p');
         $qb
@@ -69,10 +75,15 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
             ;
         }
 
-        return $qb
-            ->getQuery()
-            ->getResult()
+        $qb
+            ->setFirstResult(($page-1) * $nbPerPage)
+            ->setMaxResults($nbPerPage)
         ;
+        $qb->getQuery();
+
+
+        return new Paginator($qb, true);
+
     }
 
     public function findSystems($brand = null)

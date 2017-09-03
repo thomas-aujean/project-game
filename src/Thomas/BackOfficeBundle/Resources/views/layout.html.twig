@@ -53,7 +53,7 @@
       <div id="menu" class="col-md-3">
         <ul class="nav nav-pills nav-stacked ma-nav">
           {% if is_granted('ROLE_ADMIN') %}
-            <li class="vert"><a href="{{ path('thomas_back_office_product_index') }}">Les produits</a></li>
+            <li class="vert"><a href="{{ path('thomas_back_office_product_index', {'page': 1}) }}">Les produits</a></li>
             <li class="rouge"><a href="{{ path('thomas_back_office_users') }}">Les utilisateurs</a></li>
             <li class="jaune"><a href="{{ path('thomas_back_office_orders') }}">Les commandes</a></li>
             <li class="bleu"><a href="{{ path('thomas_back_office_coupon_index') }}">Les remises</a></li>

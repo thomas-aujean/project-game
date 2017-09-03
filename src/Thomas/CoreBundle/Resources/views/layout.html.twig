@@ -56,10 +56,8 @@
         {% endblock %}
       <div id="menu" class="col-md-3">
 
-
-        
         <ul class="nav nav-pills nav-stacked ma-nav">
-          <li class="vert"><a href="{{ path('thomas_game_games') }}">Jeux Videos</a></li>
+          <li class="vert"><a href="{{ path('thomas_game_games', {'page': 1}) }}">Jeux Videos</a></li>
           <li class="jaune"><a href="{{ path('thomas_game_systems') }}">Consoles</a></li>
           <li class="bleu"><a href="{{ path('thomas_game_access') }}">Accessoires</a></li>        
         </ul>
