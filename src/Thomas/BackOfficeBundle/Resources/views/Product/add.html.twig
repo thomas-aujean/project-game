@@ -11,7 +11,7 @@
  {{ include("ThomasBackOfficeBundle:Product:form.html.twig") }}
 
 <p>
-  <a href="{{ path('thomas_back_office_product_index') }}" class="btn btn-default">
+  <a href="{{ path('thomas_back_office_product_index', {'page': 1}) }}" class="btn btn-default">
     <i class="glyphicon glyphicon-chevron-left"></i>
     Retour à la liste
   </a>
