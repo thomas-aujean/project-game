@@ -163,8 +163,8 @@ class ProductController extends Controller
     public function viewAction($id, Request $request)
     {
         $repository = $this->getDoctrine()
-        ->getManager()
-        ->getRepository('ThomasCoreBundle:Product')
+            ->getManager()
+            ->getRepository('ThomasCoreBundle:Product')
         ;
 
         $product = $repository->find($id);
@@ -304,7 +304,29 @@ class ProductController extends Controller
     {
         
 
-        return $this->redirectToRoute('thomas_game_view', array('id' =>$id));
+        $repository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('ThomasCoreBundle:Product')
+        ;
+
+        $product = $repository->find($id);
+
+
+        if ($request->isMethod('POST')) {
+            // dump($request);die;
+            $form->handleRequest($request);
+
+
+            if( 1 == 0){
+                return $this->redirectToRoute('thomas_game_view', array('id' =>$id));
+            }
+
+        }
+        
+
+        return $this->render('ThomasGameBundle:Product:rate.html.twig', array(
+            'product' => $product
+        ));
     }
 
 

@@ -83,10 +83,14 @@ header{
     padding: 10px;
 }
 
-                                                /* CONNEXION */
+                                                /* NOTE */
 
-
-
+.star{
+    display: flex;
+}
+.star i{
+    font-size: 25px;
+}
 
 
 

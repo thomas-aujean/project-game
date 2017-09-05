@@ -1,0 +1,27 @@
+{% extends "ThomasGameBundle::layout.html.twig" %}
+{% block title %}
+  Votre note - {{ parent() }}
+{% endblock %}
+
+
+
+{% block thomasgame_body %}
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    {{ flashMessage }}
+{% endfor %}
+
+<h3 class="monh3">Votre note</h3>
+
+<p>Combien d'étoiles donnez vous à {{ product.name }} ?</p>
+<div class="star">
+
+  <i class="fa fa-star one" aria-hidden="true"></i>
+  <i class="fa fa-star two" aria-hidden="true"></i>
+  <i class="fa fa-star three" aria-hidden="true"></i>
+  <i class="fa fa-star four" aria-hidden="true"></i>
+  <i class="fa fa-star five" aria-hidden="true"></i>
+
+</div>
+
+{% endblock %}
+
