@@ -4,7 +4,7 @@ thomas_back_office:
 
 thomas_game:
     resource: "@ThomasGameBundle/Resources/config/routing.yml"
-    prefix:   /base
+    prefix:   /shop
 
 thomas_core:
     resource: "@ThomasCoreBundle/Resources/config/routing.yml"
