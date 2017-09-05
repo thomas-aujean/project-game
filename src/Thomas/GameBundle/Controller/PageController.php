@@ -132,11 +132,15 @@ class PageController extends Controller
 
         $cart = unserialize($order->getDetail());
 
+        $tva = $order->getAmount()*0.833;
+        $tva = round($tva,2);
+
         $html = $this->renderView(
              'ThomasGameBundle:Page:pdf.html.twig',
              array(
               'order' => $order,
-              'cart' => $cart
+              'cart' => $cart,
+              'tva' => $tva
              )
         );
       

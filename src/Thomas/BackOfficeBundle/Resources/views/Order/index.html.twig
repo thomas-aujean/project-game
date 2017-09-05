@@ -24,12 +24,12 @@
   {% for order in orders %}
     <tr>
       <td><a href="{{ path('thomas_back_office_order_view', {'id': order.id}) }}">{{ order.id }}</td>
-      <td><a href="{{ path('thomas_back_office_order_view', {'id': order.id}) }}">
+      <td><a href="{{ path('thomas_back_office_user_view', {'id': order.user.id}) }}">
            {{ order.user.username }} 
         </a>
       </td> 
 
-      <td>{{ order.created|date("m/d/Y") }}</td>
+      <td>{{ order.created|date("d/m/Y") }}</td>
       <td>{{ order.amount }}</td>
 
     </tr>
@@ -37,5 +37,16 @@
   
 </table>
 
+
+{# {% if nbPages > 1 %}
+  <ul class="pagination"> #}
+    {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+    {# {% for p in range(1, nbPages) %}
+      <li{% if p == page %} class="active"{% endif %}>
+        <a href="{{ path('thomas_back_office_orders', {'page': p}) }}">{{ p }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %} #}
 
 {% endblock %}

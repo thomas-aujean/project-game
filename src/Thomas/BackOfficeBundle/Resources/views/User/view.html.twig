@@ -14,17 +14,28 @@
 
 <h1 class="monh3">Utilisateur {{ user }}</h1>
 
+<div class="row">
+  <div class="col-md-6">
+    <p>Nombre de commandes : {{ nb }}</p>
+    <p>Argent dépensé : {{ total }} €</p>
+  </div>
+  <div class="col-md-6">
+    {{ include("ThomasBackOfficeBundle:Product:form.html.twig") }}
+  </div>
+</div>
+
 
 
 <p>
-  <a href="{{ path('thomas_back_office_product_index', {'page': 1}) }}" class="btn btn-default">
+  <a href="{{ path('thomas_back_office_orders') }}" class="btn btn-default">
     <i class="glyphicon glyphicon-chevron-left"></i>
-    Retour à la liste
+    Retour à la liste des commandes
   </a>
-
-  {# <a href="{{ path('thomas_back_office_user_delete', {'id': user.id}) }}" class="btn btn-danger">
-    <i class="glyphicon glyphicon-trash"></i>
-    Supprimer l'utilisateur
-  </a> #}
+</p>
+<p>
+  <a href="{{ path('thomas_back_office_users') }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Retour à la liste des utilisateurs
+  </a>
 </p>
 {% endblock %}

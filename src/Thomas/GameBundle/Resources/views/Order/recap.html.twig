@@ -32,17 +32,21 @@
       </tr>
       {% endfor %}
   </table>  
+
+<div class="cart-total">
+
   total : {{ total }} €
 
-{% if app.session.get('coupon') %}
-  <div>
-    Avec réduction de {{ app.session.get('coupon') }} %, soit {{  subs }} €
-  </div>
-  <div>
-    Nouveau total {{ total - subs }} €
-  </div>
+  {% if app.session.get('coupon') %}
+    <div>
+      Avec réduction de {{ app.session.get('coupon') }} %, soit {{  subs }} €
+    </div>
+    <div>
+      Nouveau total {{ total - subs }} €
+    </div>
 
-{% endif %}
+  {% endif %}
+</div>
 
 <div class="row">
   <div class="col-xs-12 col-sm-6">
@@ -75,8 +79,7 @@
     <div>
       {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
-        
-          <a href="{{ path('thomas_game_valid') }}">Valider ma commande</a>
+        <a href="{{ path('thomas_game_valid') }}" class="btn btn-success">Valider ma commande</a>
       {% else %}
         Vous devez être enregistré pour passer commande
           <a href="{{ path('fos_user_security_login') }}">Connexion</a>
