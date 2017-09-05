@@ -113,7 +113,11 @@ class OrderController extends Controller
         $message = (new \Swift_Message('Hello Email'))
             ->setFrom('thomas.aujean@gmail.com')
             ->setTo('shootinsplif@msn.com')
-            ->setBody('yo' , 'text/html')
+            ->setBody('
+                <h1>Merci d\'avoir effectué votre commande chez nous</h1>
+                <p>Vous pouvez télécharger votre facture et suivre votre commande dans votre espace client.</p>        
+                <p>A très bientôt.</p>        
+            ' , 'text/html')
         ;
         $this->get('mailer')->send($message);
 
