@@ -108,6 +108,31 @@ class OrderController extends Controller
         
         $request->getSession()->getFlashBag()->add('notice', 'Votre commande a bien été enregistrée.');
         
+//mail 
+
+
+//$transport = Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs');
+            //$transport = Swift_MailTransport::newInstance();
+        $transport = Swift_SmtpTransport::newInstance('in-v3.mailjet.com', 25)
+            ->setUsername('9f57d681db6bf5b4d4c0ba64e4f5ddb0')
+            ->setPassword('04e65bc24a44dd51e5cd57918012d7d9')
+            ; 
+          $mailer = Swift_Mailer::newInstance($transport);
+          $message = Swift_Message::newInstance('Message site project game')
+
+          // Set the From address with an associative array
+          ->setFrom(array('thomas.aujean@gmail.com' => 'Thomas'))
+
+          // Set the To addresses with an associative array
+          ->setTo(array('thomas.aujean@gmail.com' => 'Thomas'))
+
+          // Give it a body
+          ->setBody('Par prgizprehpih', 'text/html')
+          ;
+
+          $result = $mailer->send($message);
+
+
         return $this->redirectToRoute('thomas_core_home');
     }
 

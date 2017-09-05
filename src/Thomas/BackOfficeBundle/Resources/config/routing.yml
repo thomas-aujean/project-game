@@ -54,6 +54,10 @@ thomas_back_office_users:
     path:     users
     defaults: { _controller: ThomasBackOfficeBundle:User:index }
 
+thomas_back_office_user_view:
+    path:     user{id}
+    defaults: { _controller: ThomasBackOfficeBundle:User:view }
+
 # ORDERS
 
 thomas_back_office_orders:

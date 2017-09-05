@@ -25,7 +25,7 @@
   {% for user in users %}
     <tr>
       <td>{{ user.id }}</td>
-      <td><a href="{{ path('thomas_back_office_product_view', {'id': user.id}) }}">
+      <td><a href="{{ path('thomas_back_office_user_view', {'id': user.id}) }}">
           {{ user.username }}
         </a>
       </td> 

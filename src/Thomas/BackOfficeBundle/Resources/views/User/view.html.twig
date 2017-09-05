@@ -1,0 +1,30 @@
+{% extends "ThomasBackOfficeBundle::layout.html.twig" %}
+
+{% block title %}
+  Back Office - {{ parent() }}
+{% endblock %}
+
+
+
+{% block thomasbo_body %}
+
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    {{ flashMessage }}
+{% endfor %}
+
+<h1 class="monh3">Utilisateur {{ user }}</h1>
+
+
+
+<p>
+  <a href="{{ path('thomas_back_office_product_index', {'page': 1}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Retour à la liste
+  </a>
+
+  {# <a href="{{ path('thomas_back_office_user_delete', {'id': user.id}) }}" class="btn btn-danger">
+    <i class="glyphicon glyphicon-trash"></i>
+    Supprimer l'utilisateur
+  </a> #}
+</p>
+{% endblock %}
