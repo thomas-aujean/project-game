@@ -111,19 +111,9 @@ class OrderController extends Controller
 //mail 
 
 $message = (new \Swift_Message('Hello Email'))
-->setFrom('send@example.com')
-->setTo('thomas.aujean@gmail.com')
-->setBody('yo' , 'text/html')
-/*
- * If you also want to include a plaintext version of the message
-->addPart(
-    $this->renderView(
-        'Emails/registration.txt.twig',
-        array('name' => $name)
-    ),
-    'text/plain'
-)
-*/
+    ->setFrom('send@example.com')
+    ->setTo('thomas.aujean@gmail.com')
+    ->setBody('yo' , 'text/html')
 ;
 $this->get('mailer')->send($message);
 // $mailer->send($message);

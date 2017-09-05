@@ -67,10 +67,10 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: '%mailer_transport%'
-    host: '%mailer_host%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
+    transport: 'in-v3.mailjet.com'
+    host: '25'
+    username: '9f57d681db6bf5b4d4c0ba64e4f5ddb0'
+    password: '04e65bc24a44dd51e5cd57918012d7d9'
     spool: { type: memory }
 
 # Stof\DoctrineExtensionsBundle configuration
