@@ -14,6 +14,11 @@
 
   <h2 class="monh3">{{ product.name }}</h2>
 
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    {{ flashMessage }}
+{% endfor %}
+
+
   <div class="row">
     <div class="col-md-6">
     {% if product.productImage is not null %}
@@ -33,6 +38,12 @@
         <div class="col-md-6">{{ product.editor.name }}</div>
       </div>
       {% endif %}
+      {% if note > 0 %}
+      <div class="row">
+        <div class="col-md-6">Note</div>
+        <div class="col-md-6">{{ note }} / 5</div>
+      </div>
+      {% endif %}
       <div class="row">
         <div class="col-md-6">Prix</div>
         <div class="col-md-6">{{ product.price }} €</div>
@@ -45,7 +56,9 @@
     </div>
     <div>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% if check is null %}
         <a href="{{ path('thomas_game_rate', {'id': product.id}) }}">Donnez-lui une note</a>
+        {% endif %}
     {% endif %}
     </div>
 

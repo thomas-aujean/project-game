@@ -10,4 +10,19 @@ namespace Thomas\CoreBundle\Repository;
  */
 class RateRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findRate($id = null)
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb
+            ->where('r.product = :id')
+            ->setParameter('id', $id)
+        ;
+
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

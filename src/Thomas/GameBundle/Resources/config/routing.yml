@@ -40,6 +40,10 @@ thomas_game_rate:
     path:     /avis/{id}
     defaults: { _controller: ThomasGameBundle:Product:rate }
 
+thomas_rate_add:
+    path:     /avis/{id}/{rate}
+    defaults: { _controller: ThomasGameBundle:Product:rateAdd }
+
 
 thomas_game_products:
     path:     /produits

@@ -8,6 +8,7 @@ use Thomas\CoreBundle\Form\SystemSearchType;
 use Thomas\CoreBundle\Form\GameSearchType;
 use Thomas\CoreBundle\Form\SearchType;
 use Thomas\CoreBundle\Entity\Product;
+use Thomas\CoreBundle\Entity\Rate;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends Controller
@@ -169,13 +170,40 @@ class ProductController extends Controller
 
         $product = $repository->find($id);
 
+        // gestion de la note
+        
+        $ratep = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('ThomasCoreBundle:Rate')
+        ;
+
+        $rates = $ratep->findRate($id);
+        $note = 0;
+        $nbvote = count($rates);
+        foreach($rates as $rate){
+            $note += $rate->getRate();
+        }
+        if ($nbvote > 0){
+            $note = $note / $nbvote;
+
+        }
+
+        // on verifie si l'utilisateur en cours a déjà voté ce produit
+        $user = $this->getUser();
+        $check = $ratep->findOneBy(
+            array('user' => $user->getId(), 'product' => $product->getId())
+        );
+
+
         if (null === $product) {
         throw new NotFoundHttpException("Le produit recheché n'existe pas.");
         }
 
         // Le render ne change pas, on passait avant un tableau, maintenant un objet
         return $this->render('ThomasGameBundle:Product:view.html.twig', array(
-        'product' => $product
+        'product' => $product,
+        'note' => $note,
+        'check' => $check
         ));
     }
 
@@ -285,13 +313,6 @@ class ProductController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        // $listProducts = $em->getRepository('ThomasCoreBundle:Product')->findBy(
-        // array('system'=> $filter),                 // Pas de critère
-        // array('id' => 'desc'), // On trie par date décroissante
-        // $limit,                  // On sélectionne $limit annonces
-        // 0                        // À partir du premier
-        // );
-
         $listProducts = $em->getRepository('ThomasCoreBundle:Product')->findSuggestions($filter, $id, $limit);
 
 
@@ -327,6 +348,38 @@ class ProductController extends Controller
         return $this->render('ThomasGameBundle:Product:rate.html.twig', array(
             'product' => $product
         ));
+    }
+
+    public function rateAddAction(Request $request, $id, $rate)
+    {
+        
+
+        $repository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('ThomasCoreBundle:Product')
+        ;
+
+        $product = $repository->find($id);
+
+        $user = $this->getUser();
+        $rate = intval($rate);
+
+        if ($rate > 5 || $rate < 1){
+            $request->getSession()->getFlashBag()->add('notice', 'Cette note est impossible.');
+            return $this->redirectToRoute('thomas_game_view', array('id' =>$id));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $rateObj = New Rate;
+        $rateObj->setRate($rate);
+        $rateObj->setUser($user->getId());
+        $rateObj->setProduct($product->getId());
+        $em->persist($rateObj);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('notice', 'Merci !');
+        return $this->redirectToRoute('thomas_game_view', array('id' =>$id));
     }
 
 

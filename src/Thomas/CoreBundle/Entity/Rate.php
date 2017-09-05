@@ -73,14 +73,18 @@ class Rate
         return $this->rate;
     }
 
+    
+
+  
+
     /**
      * Set user
      *
-     * @param \Thomas\UserBundle\Entity\User $user
+     * @param integer $user
      *
      * @return Rate
      */
-    public function setUser(\Thomas\UserBundle\Entity\User $user = null)
+    public function setUser($user)
     {
         $this->user = $user;
 
@@ -90,7 +94,7 @@ class Rate
     /**
      * Get user
      *
-     * @return \Thomas\UserBundle\Entity\User
+     * @return integer
      */
     public function getUser()
     {
@@ -100,11 +104,11 @@ class Rate
     /**
      * Set product
      *
-     * @param \Thomas\CoreBundle\Entity\Productr $product
+     * @param integer $product
      *
      * @return Rate
      */
-    public function setProduct(\Thomas\CoreBundle\Entity\Product $product = null)
+    public function setProduct($product)
     {
         $this->product = $product;
 
@@ -114,7 +118,7 @@ class Rate
     /**
      * Get product
      *
-     * @return \Thomas\CoreBundle\Entity\Product
+     * @return integer
      */
     public function getProduct()
     {

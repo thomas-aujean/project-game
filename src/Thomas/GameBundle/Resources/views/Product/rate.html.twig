@@ -15,11 +15,21 @@
 <p>Combien d'étoiles donnez vous à {{ product.name }} ?</p>
 <div class="star">
 
-  <i class="fa fa-star one" aria-hidden="true"></i>
-  <i class="fa fa-star two" aria-hidden="true"></i>
-  <i class="fa fa-star three" aria-hidden="true"></i>
-  <i class="fa fa-star four" aria-hidden="true"></i>
-  <i class="fa fa-star five" aria-hidden="true"></i>
+  <a href="{{ path('thomas_rate_add', {'id': product.id, 'rate': 1}) }}">
+    <i class="fa fa-star " id="one" aria-hidden="true"></i>
+  </a>
+  <a href="{{ path('thomas_rate_add', {'id': product.id, 'rate': 2}) }}">
+    <i class="fa fa-star " id="two" aria-hidden="true"></i>
+  </a>
+  <a href="{{ path('thomas_rate_add', {'id': product.id, 'rate': 3}) }}">
+    <i class="fa fa-star " id="three" aria-hidden="true"></i>
+  </a>
+  <a href="{{ path('thomas_rate_add', {'id': product.id, 'rate': 4}) }}">
+    <i class="fa fa-star " id="four" aria-hidden="true"></i>
+  </a>
+  <a href="{{ path('thomas_rate_add', {'id': product.id, 'rate': 5}) }}">
+    <i class="fa fa-star " id="five" aria-hidden="true"></i>
+  </a>
 
 </div>
 
