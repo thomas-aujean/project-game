@@ -18,7 +18,7 @@ class ProductController extends Controller
         if ($page < 1) {
             throw $this->createNotFoundException("La page ".$page." n'existe pas.");
         }
-        $nbPerPage = 10;
+        $nbPerPage = 20;
 
         $repository = $this
             ->getDoctrine()
