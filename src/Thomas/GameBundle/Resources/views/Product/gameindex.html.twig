@@ -15,6 +15,11 @@
 {% block thomasgame_body %}
 <h3 class="monh3">Les jeux</h3>
 
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    {{ flashMessage }}
+{% endfor %}
+
+
   <div class="row">
   {% for product in listGames %}
 

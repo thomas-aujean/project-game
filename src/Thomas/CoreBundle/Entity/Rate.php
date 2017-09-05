@@ -29,12 +29,12 @@ class Rate
     private $rate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Thomas\UserBundle\Entity\User", inversedBy="rate")
+     * @ORM\Column(name="user", type="integer")
      */
      private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Thomas\CoreBundle\Entity\Product", inversedBy="rate")
+     * @ORM\Column(name="product", type="integer")
      */
      private $product;
 

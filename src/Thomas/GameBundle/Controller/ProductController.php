@@ -84,6 +84,8 @@ class ProductController extends Controller
 
     public function gameIndexAction(Request $request, $page, $console = null, $name = null)
     {
+
+
         if ($page < 1) {
             throw $this->createNotFoundException("La page ".$page." n'existe pas.");
         }
@@ -120,9 +122,18 @@ class ProductController extends Controller
         }
         $nbPages = ceil(count($listGames) / $nbPerPage);
 
+
+        
+        if (count($listGames) === 0) {
+            $request->getSession()->getFlashBag()->add('notice', 'Aucun jeu ne correspond à votre demande.');
+            return $this->redirectToRoute('thomas_game_games', array('page' => 1));
+        }
         if ($page > $nbPages) {
             throw $this->createNotFoundException("La page ".$page." n'existe pas.");
         }
+
+
+
         
         return $this->render('ThomasGameBundle:Product:gameindex.html.twig', array(
             'listGames' => $listGames,
