@@ -10,6 +10,7 @@
   {% for flashMessage in app.session.flashbag.get('notice') %}
     {{ flashMessage }}
   {% endfor %}
+  
   <h3 class="monh3">Meilleures ventes</h3>
   {{ render(controller("ThomasGameBundle:Product:best", {'limit': 3})) }}
 
