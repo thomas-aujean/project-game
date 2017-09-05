@@ -31,8 +31,6 @@ class User extends BaseUser
     * @var string
     *
     * @ORM\Column(name="zipcode", type="string", length=255)
-    * @Assert\Length(max=5, minMessage="Le code postal ne doit pas dépasser {{ limit }} chiffres.")
-    * @Assert\Type(type="integer", message="Merci de ne saisir que des nombres.")
     */
     private $zipcode;
 
