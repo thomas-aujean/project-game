@@ -190,8 +190,13 @@ class ProductController extends Controller
 
         // on verifie si l'utilisateur en cours a déjà voté ce produit
         $user = $this->getUser();
+        if ($user != null){
+            $userId = $user->getId();
+        } else {
+            $userId = 0;
+        }
         $check = $ratep->findOneBy(
-            array('user' => $user->getId(), 'product' => $product->getId())
+            array('user' => $userId, 'product' => $product->getId())
         );
 
 
