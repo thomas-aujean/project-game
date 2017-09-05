@@ -110,9 +110,9 @@ class OrderController extends Controller
         
 //mail 
 
-        $message = (new \Swift_Message('Hello Email'))
-            ->setFrom('thomas.aujean@gmail.com')
-            ->setTo('shootinsplif@msn.com')
+        $message = (new \Swift_Message('Votre commande est validée'))
+            ->setFrom(['thomas.aujean@gmail.com' => 'Project Games'])
+            ->setTo($this->getUser()->getEmail())
             ->setBody('
                 <h1>Merci d\'avoir effectué votre commande chez nous</h1>
                 <p>Vous pouvez télécharger votre facture et suivre votre commande dans votre espace client.</p>        
