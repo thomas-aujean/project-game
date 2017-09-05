@@ -110,27 +110,45 @@ class OrderController extends Controller
         
 //mail 
 
+$message = (new \Swift_Message('Hello Email'))
+->setFrom('send@example.com')
+->setTo('thomas.aujean@gmail.com')
+->setBody('yo' , 'text/html')
+/*
+ * If you also want to include a plaintext version of the message
+->addPart(
+    $this->renderView(
+        'Emails/registration.txt.twig',
+        array('name' => $name)
+    ),
+    'text/plain'
+)
+*/
+;
+$this->get('mailer')->send($message);
+// $mailer->send($message);
 
-//$transport = Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs');
-            //$transport = Swift_MailTransport::newInstance();
-        $transport = Swift_SmtpTransport::newInstance('in-v3.mailjet.com', 25)
-            ->setUsername('9f57d681db6bf5b4d4c0ba64e4f5ddb0')
-            ->setPassword('04e65bc24a44dd51e5cd57918012d7d9')
-            ; 
-          $mailer = Swift_Mailer::newInstance($transport);
-          $message = Swift_Message::newInstance('Message site project game')
 
-          // Set the From address with an associative array
-          ->setFrom(array('thomas.aujean@gmail.com' => 'Thomas'))
+// //$transport = Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs');
+//             //$transport = Swift_MailTransport::newInstance();
+//         $transport = (new Swift_SmtpTransport('in-v3.mailjet.com', 25))
+//             ->setUsername('9f57d681db6bf5b4d4c0ba64e4f5ddb0')
+//             ->setPassword('04e65bc24a44dd51e5cd57918012d7d9')
+//             ; 
+//           $mailer = new Swift_Mailer($transport);
+//           $message = (new Swift_Message('Site project game'))
 
-          // Set the To addresses with an associative array
-          ->setTo(array('thomas.aujean@gmail.com' => 'Thomas'))
+//           // Set the From address with an associative array
+//           ->setFrom(array('thomas.aujean@gmail.com' => 'Thomas'))
 
-          // Give it a body
-          ->setBody('Par prgizprehpih', 'text/html')
-          ;
+//           // Set the To addresses with an associative array
+//           ->setTo(array('thomas.aujean@gmail.com' => 'Thomas'))
 
-          $result = $mailer->send($message);
+//           // Give it a body
+//           ->setBody('Par prgizprehpih', 'text/html')
+//           ;
+
+//           $result = $mailer->send($message);
 
 
         return $this->redirectToRoute('thomas_core_home');
