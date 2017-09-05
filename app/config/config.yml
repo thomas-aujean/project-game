@@ -87,8 +87,8 @@ fos_user:
 
     ## To solve the problem
     from_email:
-        address: "thomas@project-game.com"
-        sender_name: "No Reply"
+        address: "thomas.aujean@gmail.com"
+        sender_name: "Project Game"
     registration:
         form:
             type: Thomas\UserBundle\Form\RegistrationType
