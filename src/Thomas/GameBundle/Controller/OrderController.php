@@ -52,6 +52,7 @@ class OrderController extends Controller
                     $coupon = $repository->findOneByName($data->getName());
                     if ($coupon){
                         $session->set('coupon', $coupon->getPercent());
+                        return $this->redirectToRoute('thomas_game_order');
                     }
 
                 }
@@ -116,34 +117,12 @@ class OrderController extends Controller
             ->setBody('
                 <h1>Merci d\'avoir effectué votre commande chez nous</h1>
                 <p>Vous pouvez télécharger votre facture et suivre votre commande dans votre espace client.</p>        
-                <p>A très bientôt.</p>        
+                <p>A très bientôt sur <a href="shop.thomasaujean.com">Project Game</a>.</p>        
             ' , 'text/html')
         ;
         $this->get('mailer')->send($message);
 
-
-
         return $this->redirectToRoute('thomas_core_home');
     }
 
-    /**
-     * Export to PDF
-     * 
-     * @Route("/pdf", name="acme_demo_pdf")
-     */
-    public function pdfAction()
-    {
-        $html = $this->renderView('ThomasGameBundle:Order:pdf.html.twig');
-
-        $filename = sprintf('test-%s.pdf', date('Y-m-d'));
-
-        return new Response(
-            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-            200,
-            [
-                'Content-Type'        => 'application/pdf',
-                'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
-            ]
-        );
-    } 
 }

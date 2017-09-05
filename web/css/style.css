@@ -113,7 +113,7 @@ header{
     border-radius: 5px;
     height: 330px;
     padding: 10px;
-    /* margin: 10px;     */
+    margin-bottom: 10px;    
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -130,6 +130,12 @@ header{
     text-decoration: none;
 }
 
+.product-image{
+    height: 159px;
+    width: 222px;
+    display: flex;
+    justify-content: center;
+}
 .product-add{
     text-align: right;
 }
@@ -140,6 +146,7 @@ header{
     width: 100%;
     text-align: center;
     margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 .big-link{
@@ -155,6 +162,8 @@ header{
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     color: white;
 }
+
+
 
                                                 /* PANIER */
 

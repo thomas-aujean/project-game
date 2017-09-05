@@ -9,7 +9,7 @@
         <a href="{{ path('thomas_game_view', {'id': product.id}) }}">
           <div class="product-image">
             {% if product.productImage is not null %} 
-                <img src="{{ asset(product.productImage.webPath) }}" alt="{{ product.productImage.alt }}" style="width:100%;max-height:200px"/>
+                <img src="{{ asset(product.productImage.webPath) }}" alt="{{ product.productImage.alt }}" style="max-width:100%;max-height:200px"/>
             {% endif %}
           </div>
           <div class="product-name">

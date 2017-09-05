@@ -65,7 +65,9 @@ thomas_game_view:
         id: \d+
 
 
-
+thomas_user_pdf:
+    path:     pdf/{id}
+    defaults: { _controller: ThomasGameBundle:Page:pdf }
 
 thomas_game_user_order:
     path:     /ma-commande/{id}
@@ -90,3 +92,7 @@ thomas_game_ml:
 thomas_game_cgv:
     path:     /cgv
     defaults: { _controller: ThomasGameBundle:Page:cgv }
+
+thomas_game_user_disable:
+    path:     /desactiver
+    defaults: { _controller: ThomasGameBundle:Page:disable }

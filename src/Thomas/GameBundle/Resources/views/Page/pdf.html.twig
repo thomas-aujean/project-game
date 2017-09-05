@@ -1,0 +1,39 @@
+<div style="color: #828282;">
+<h2>Project Game</h2>
+
+<p>121 Avenue du Général de Gaulle<br>94170 -  Le perreux sur marne </p>
+
+<h1 class="monh3">Commande n° {{ order.id }} passée le {{ order.created|date("m/d/Y") }}</h1>
+
+
+<h2>Détail de la commande</h2>
+
+<table style="border:1px solid #F0BA24; border-radius:10px; padding:5px;">
+  <tr style="font-weight: bold;">
+    <th>Produit</th>
+    <th>Quantité</th>
+    <th>Prix Unitaire</th>
+    <th>Sous total</th>
+  </tr>
+  {% for item in cart %}
+  <tr>
+    <td>{{ item.name }}</td>
+    <td>{{ item.qty }}</td>
+    <td>{{ item.unitPrice }}</td>
+    <td>{{ item.price }}</td>
+  </tr>
+  {% endfor %}
+</table>
+<br>
+<div>Remise : {{ order.coupon }} %</div>
+<div>Total : {{ order.amount }} €</div>
+
+<h2>Livraison</h2>
+
+<p>La commande sera livrée à </p>
+<p> {{ order.user }} <br>{{ order.user.address }} <br>{{ order.user.zipcode }} - {{ order.user.city }}</p>
+
+
+
+<p>Merci de nous avoir fait confiance et à bientôt sur <a href="shop.thomasaujean.com">Project-Game</a> =)</p>
+</div>

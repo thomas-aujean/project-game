@@ -34,6 +34,9 @@
 <div>Total : {{ order.amount }}</div>
 
 
-
+<a href="{{ path('thomas_user_pdf', {'id': order.id}) }}" class="btn btn-default">
+  <i class="glyphicon glyphicon-chevron-left"></i>
+  PDF
+</a>
 
 {% endblock %}

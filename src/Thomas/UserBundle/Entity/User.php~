@@ -5,6 +5,7 @@ namespace Thomas\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="user")
@@ -12,37 +13,37 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
-  /**
-   * @ORM\Column(name="id", type="integer")
-   * @ORM\Id
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
-  protected $id;
-
-  /**
-  * @var string
-  *
-  * @ORM\Column(name="address", type="string", length=255)
-  */
-  private $address;
-
-  /**
-  * @var string
-  *
-  * @ORM\Column(name="zipcode", type="string", length=255)
-  */
-  private $zipcode;
-
-  /**
-  * @var string
-  *
-  * @ORM\Column(name="city", type="string", length=255)
-  */
-  private $city;
-
-
+    /**
+    * @ORM\Column(name="id", type="integer")
+    * @ORM\Id
+    * @ORM\GeneratedValue(strategy="AUTO")
+    */
+    protected $id;
 
     /**
+    * @var string
+    *
+    * @ORM\Column(name="address", type="string", length=255)
+    */
+    private $address;
+
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="zipcode", type="string", length=255)
+    * @Assert\Length(max=5, minMessage="Le code postal ne doit pas dépasser {{ limit }} chiffres.")
+    * @Assert\Type(type="integer", message="Merci de ne saisir que des nombres.")
+    */
+    private $zipcode;
+
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="city", type="string", length=255)
+    */
+    private $city;
+
+       /**
      * Set address
      *
      * @param string $address
@@ -88,5 +89,29 @@ class User extends BaseUser
     public function getZipcode()
     {
         return $this->zipcode;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return User
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 }

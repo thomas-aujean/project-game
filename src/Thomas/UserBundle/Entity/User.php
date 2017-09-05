@@ -13,39 +13,37 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User extends BaseUser
 {
-  /**
-   * @ORM\Column(name="id", type="integer")
-   * @ORM\Id
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
-  protected $id;
-
-  /**
-  * @var string
-  *
-  * @ORM\Column(name="address", type="string", length=255)
-  */
-  private $address;
-
-  /**
-  * @var string
-  *
-  * @ORM\Column(name="zipcode", type="string", length=255)
-  * @Assert\Length(max=5, minMessage="Le code postal ne doit pas dépasser {{ limit }} chiffres.")
-  * @Assert\Type(type="integer", message="Merci de ne saisir que des nombres.")
-  */
-  private $zipcode;
-
-  /**
-  * @var string
-  *
-  * @ORM\Column(name="city", type="string", length=255)
-  */
-  private $city;
-
-
+    /**
+    * @ORM\Column(name="id", type="integer")
+    * @ORM\Id
+    * @ORM\GeneratedValue(strategy="AUTO")
+    */
+    protected $id;
 
     /**
+    * @var string
+    *
+    * @ORM\Column(name="address", type="string", length=255)
+    */
+    private $address;
+
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="zipcode", type="string", length=255)
+    * @Assert\Length(max=5, minMessage="Le code postal ne doit pas dépasser {{ limit }} chiffres.")
+    * @Assert\Type(type="integer", message="Merci de ne saisir que des nombres.")
+    */
+    private $zipcode;
+
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="city", type="string", length=255)
+    */
+    private $city;
+
+       /**
      * Set address
      *
      * @param string $address
