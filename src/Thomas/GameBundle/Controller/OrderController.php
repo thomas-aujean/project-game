@@ -110,35 +110,13 @@ class OrderController extends Controller
         
 //mail 
 
-$message = (new \Swift_Message('Hello Email'))
-    ->setFrom('send@example.com')
-    ->setTo('thomas.aujean@gmail.com')
-    ->setBody('yo' , 'text/html')
-;
-$this->get('mailer')->send($message);
-// $mailer->send($message);
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('thomas.aujean@gmail.com')
+            ->setTo('shootinsplif@msn.com')
+            ->setBody('yo' , 'text/html')
+        ;
+        $this->get('mailer')->send($message);
 
-
-// //$transport = Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs');
-//             //$transport = Swift_MailTransport::newInstance();
-//         $transport = (new Swift_SmtpTransport('in-v3.mailjet.com', 25))
-//             ->setUsername('9f57d681db6bf5b4d4c0ba64e4f5ddb0')
-//             ->setPassword('04e65bc24a44dd51e5cd57918012d7d9')
-//             ; 
-//           $mailer = new Swift_Mailer($transport);
-//           $message = (new Swift_Message('Site project game'))
-
-//           // Set the From address with an associative array
-//           ->setFrom(array('thomas.aujean@gmail.com' => 'Thomas'))
-
-//           // Set the To addresses with an associative array
-//           ->setTo(array('thomas.aujean@gmail.com' => 'Thomas'))
-
-//           // Give it a body
-//           ->setBody('Par prgizprehpih', 'text/html')
-//           ;
-
-//           $result = $mailer->send($message);
 
 
         return $this->redirectToRoute('thomas_core_home');
