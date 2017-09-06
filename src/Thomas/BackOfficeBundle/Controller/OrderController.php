@@ -113,13 +113,15 @@ class OrderController extends Controller
 
         $message = (new \Swift_Message('Votre commande a été expédiée'))
             ->setFrom(['thomas.aujean@gmail.com' => 'Project Games'])
-            ->setTo($this->getUser()->getEmail())
+            ->setTo($order->getUser()->getEmail())
             ->setBody('
                 <h1>Merci d\'avoir effectué votre commande chez nous</h1>
                 <p>Vous pouvez télécharger votre facture et suivre votre commande dans votre espace client.</p>        
                 <p>A très bientôt sur <a href="shop.thomasaujean.com">Project Game</a>.</p>        
             ' , 'text/html')
         ;
+
+        
         $this->get('mailer')->send($message);
 
         return $this->redirectToRoute('thomas_back_office_orders');
