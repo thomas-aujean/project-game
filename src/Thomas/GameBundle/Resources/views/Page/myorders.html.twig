@@ -24,7 +24,7 @@
       <td><a href="{{ path('thomas_game_user_order', {'id': order.id}) }}">{{ order.id }}</td>
 
 
-      <td>{{ order.created|date("m/d/Y") }}</td>
+      <td>{{ order.created|date("d/m/Y") }}</td>
       <td>{{ order.amount }} €</td>
       <td>{{ order.statute.name }}</td>
 
