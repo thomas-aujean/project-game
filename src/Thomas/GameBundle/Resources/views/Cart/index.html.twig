@@ -29,8 +29,8 @@
           <span class="qty">{{ item.qty }}</span>
           <a href="{{ path('thomas_game_add_qty', {'id': key}) }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
         </div>
-        <td>{{ item.unitPrice }} €</td>
-        <td>{{ item.price }} €</td>
+        <td>{{ item.unitPrice|number_format(2) }} €</td>
+        <td>{{ item.price|number_format(2) }} €</td>
         <td><a href="{{ path('thomas_game_delete', {'id': key}) }}"><i class="fa fa-times" aria-hidden="true"></i></a></td>
       </tr>
       {% endfor %}
@@ -39,7 +39,7 @@
 
     
   <div class="cart-total">
-    total : {{ total }} €
+    total : {{ total|number_format(2) }} €
   </div>
   <div>
     <a href="{{ path('thomas_game_remove') }}"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Vider le panier</a>

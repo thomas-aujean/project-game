@@ -27,22 +27,22 @@
         <td>       
           {{ item.qty }}
         </td>
-        <td>{{ item.unitPrice }} €</td>
-        <td>{{ item.price }} €</td>
+        <td>{{ item.unitPrice|number_format(2) }} €</td>
+        <td>{{ item.price|number_format(2) }} €</td>
       </tr>
       {% endfor %}
   </table>  
 
 <div class="cart-total">
 
-  total : {{ total }} €
+  total : {{ total|number_format(2) }} €
 
   {% if app.session.get('coupon') %}
     <div>
-      Avec réduction de {{ app.session.get('coupon') }} %, soit {{  subs }} €
+      Avec réduction de {{ app.session.get('coupon') }} %, soit {{  subs|number_format(2) }} €
     </div>
     <div>
-      Nouveau total {{ total - subs }} €
+      Nouveau total {{ (total - subs)|number_format(2) }} €
     </div>
 
   {% endif %}
