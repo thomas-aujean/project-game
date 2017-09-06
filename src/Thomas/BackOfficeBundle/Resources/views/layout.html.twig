@@ -35,11 +35,11 @@
           <div class="connexion">
             <div class="connexion-info">
               {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                  Connecté en tant que <a href="{{ path('thomas_game_user') }}">{{ app.user.username }}</a><br>                  
-                  <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+                <p class="user-online">Connecté en tant que <a href="{{ path('thomas_game_user') }}">{{ app.user.username }}</a></p>             
+                <a class="btn-connect" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
               {% else %}
-                  <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-                  <p>Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
+                <a class="btn-connect" href="{{ path('fos_user_security_login') }}">Connexion</a>
+                <p class="join" >Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
               {% endif %}
             </div>
           </div> 
