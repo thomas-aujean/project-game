@@ -26,40 +26,70 @@
       {% endif %}
     </div>
     <div class="col-md-6">
-      {% if product.system is not null %}
-      <div class="row">
-        <div class="col-md-6">Console</div>
-        <div class="col-md-6">{{ product.system.name }}</div>
-      </div>
-      {% endif %}
-      {% if product.editor is not null %}
-      <div class="row">
-        <div class="col-md-6">Editeur</div>
-        <div class="col-md-6">{{ product.editor.name }}</div>
-      </div>
-      {% endif %}
-      {% if note > 0 %}
-      <div class="row">
-        <div class="col-md-6">Note</div>
-        <div class="col-md-6">{{ note }} / 5</div>
-      </div>
-      {% endif %}
-      <div class="row">
-        <div class="col-md-6">Prix</div>
-        <div class="col-md-6">{{ product.price }} €</div>
-      </div>
-    </div>
-    <div class="product-add">  
-      <a href="{{ path('thomas_game_add', {'id': product.id}) }}" class="btn btn-success">
-        <i class="glyphicon glyphicon-plus"></i>
-        Ajouter au panier</a>
-    </div>
-    <div>
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        {% if check is null %}
-        <a href="{{ path('thomas_game_rate', {'id': product.id}) }}">Donnez-lui une note</a>
+      <div class="desc-block">
+        <div>
+          {% if product.system is not null %}
+          <div class="row">
+            <div class="col-md-6">Console</div>
+            <div class="col-md-6">{{ product.system.name }}</div>
+          </div>
+          {% endif %}
+          {% if product.editor is not null %}
+          <div class="row">
+            <div class="col-md-6">Editeur</div>
+            <div class="col-md-6">{{ product.editor.name }}</div>
+          </div>
+          {% endif %}
+          {% if note > 0 %}
+          <div class="row">
+            <div class="col-md-6">Note</div>
+            <div class="col-md-6">{{ note }} / 5 - {% if nbvote == 1 %} {{ nbvote }} vote {% else %} {{ nbvote }} votes {% endif %}</div>
+          </div>
+          {% endif %}
+          <div class="row">
+            <div class="col-md-6">Prix</div>
+            <div class="col-md-6">{{ product.price }} €</div>
+          </div>
+      
+        </div>
+        <div class="product-add">  
+          <a href="{{ path('thomas_game_add', {'id': product.id}) }}" class="btn btn-success">
+            <i class="glyphicon glyphicon-plus"></i>
+            Ajouter au panier</a>
+        </div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {% if check is null %}
+              <div class="rate-block">
+                  Donnez-lui une note
+
+                  <div class="star">
+
+                    <a href="{{ path('thomas_rate_add', {'id': product.id, 'rate': 1}) }}">
+                      <i class="fa fa-star " id="one" aria-hidden="true"></i>
+                    </a>
+                    <a href="{{ path('thomas_rate_add', {'id': product.id, 'rate': 2}) }}">
+                      <i class="fa fa-star " id="two" aria-hidden="true"></i>
+                    </a>
+                    <a href="{{ path('thomas_rate_add', {'id': product.id, 'rate': 3}) }}">
+                      <i class="fa fa-star " id="three" aria-hidden="true"></i>
+                    </a>
+                    <a href="{{ path('thomas_rate_add', {'id': product.id, 'rate': 4}) }}">
+                      <i class="fa fa-star " id="four" aria-hidden="true"></i>
+                    </a>
+                    <a href="{{ path('thomas_rate_add', {'id': product.id, 'rate': 5}) }}">
+                      <i class="fa fa-star " id="five" aria-hidden="true"></i>
+                    </a>
+
+                  </div>
+
+
+              </div>
+            {% endif %}
         {% endif %}
-    {% endif %}
+      
+      
+      </div>
+
     </div>
 
   </div>

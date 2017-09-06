@@ -51,4 +51,10 @@
   PDF
 </a>
 
+{% if order.statute.id == 1 %}
+<a href="{{ path('thomas_back_office_send', {'id': order.id}) }}" class="btn btn-default">
+  <i class="glyphicon glyphicon-mail"></i>
+  Commande expédiée
+</a>
+{% endif %}
 {% endblock %}

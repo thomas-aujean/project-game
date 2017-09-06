@@ -208,7 +208,8 @@ class ProductController extends Controller
         return $this->render('ThomasGameBundle:Product:view.html.twig', array(
         'product' => $product,
         'note' => $note,
-        'check' => $check
+        'check' => $check,
+        'nbvote' => $nbvote
         ));
     }
 

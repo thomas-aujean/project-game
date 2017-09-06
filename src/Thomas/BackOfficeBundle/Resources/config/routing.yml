@@ -72,6 +72,10 @@ thomas_back_office_order_view:
     path:     order/{id}
     defaults: { _controller: ThomasBackOfficeBundle:Order:view }
 
+thomas_back_office_send:
+    path:     send/{id}
+    defaults: { _controller: ThomasBackOfficeBundle:Order:send }
+
 
 # SETTINGS
 

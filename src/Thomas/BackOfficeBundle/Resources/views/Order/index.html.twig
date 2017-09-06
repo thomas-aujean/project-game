@@ -10,6 +10,9 @@
 {% for flashMessage in app.session.flashbag.get('info') %}
     {{ flashMessage }}
 {% endfor %}
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    {{ flashMessage }}
+{% endfor %}
 
 
 <h1 class="monh3">Liste des commandes</h1>

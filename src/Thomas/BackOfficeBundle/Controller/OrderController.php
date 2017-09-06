@@ -87,6 +87,45 @@ class OrderController extends Controller
     }
 
 
+    public function sendAction(Request $request, $id)
+    {
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('ThomasCoreBundle:MyOrder')
+        ;
+        $order = $repository->find($id);
+
+        $repository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('ThomasCoreBundle:Statute')
+        ;
+
+        $statute = $repository->find(2);
+        $order->setStatute($statute);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($order);
+        $em->flush();
+        $request->getSession()->getFlashBag()->add('notice', 'Commande expédiée.');
+
+
+        $message = (new \Swift_Message('Votre commande a été expédiée'))
+            ->setFrom(['thomas.aujean@gmail.com' => 'Project Games'])
+            ->setTo($this->getUser()->getEmail())
+            ->setBody('
+                <h1>Merci d\'avoir effectué votre commande chez nous</h1>
+                <p>Vous pouvez télécharger votre facture et suivre votre commande dans votre espace client.</p>        
+                <p>A très bientôt sur <a href="shop.thomasaujean.com">Project Game</a>.</p>        
+            ' , 'text/html')
+        ;
+        $this->get('mailer')->send($message);
+
+        return $this->redirectToRoute('thomas_back_office_orders');
+    }
+
+
     public function returnPDFResponseFromHTML($html){
         //set_time_limit(30); uncomment this line according to your needs
         // If you are not in a controller, retrieve of some way the service container and then retrieve it
