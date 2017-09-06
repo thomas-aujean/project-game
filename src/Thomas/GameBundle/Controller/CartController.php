@@ -114,7 +114,7 @@ class CartController extends Controller
                 ->setBody('
                     <h1>Bonjour</h1>
                     <p>Vous aimez les jeux rétros. Et on trouve ça génial.</p>        
-                    <p>Essayez donc le code promo "petiplus" pour votre prochaine commande.</p>
+                    <p>Essayez donc le code promo "petitplus" pour votre prochaine commande.</p>
                     <p>A très bientôt sur <a href="shop.thomasaujean.com">Project Game</a>.</p>        
                 ' , 'text/html')
             ;
