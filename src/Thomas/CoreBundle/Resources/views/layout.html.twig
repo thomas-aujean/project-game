@@ -42,7 +42,13 @@
               {% endif %}
             </div>
           </div> 
-          <a href="{{ path('thomas_game_cart') }}" class="cart-link">Mon panier<i class="glyphicon glyphicon-shopping-cart"></i></a></p>
+          {% set filter = app.session.get('panier') %}
+            {% if filter|length > 0 %}
+            <a href="{{ path('thomas_game_cart') }}" class="cart-link">
+            Mon panier
+              <i class="glyphicon glyphicon-shopping-cart"></i>
+            </a>
+            {% endif %}
         </div>
         
       </div>

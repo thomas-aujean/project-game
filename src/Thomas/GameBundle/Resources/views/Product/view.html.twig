@@ -20,35 +20,35 @@
 
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-xs-6 col-md-6">
     {% if product.productImage is not null %}
       <img src="{{ asset(product.productImage.webPath) }}" alt="{{ product.productImage.alt }}" style="width:100%"/>
       {% endif %}
     </div>
-    <div class="col-md-6">
+    <div class="col-xs-6 col-md-6">
       <div class="desc-block">
         <div>
           {% if product.system is not null %}
           <div class="row">
-            <div class="col-md-6">Console</div>
-            <div class="col-md-6">{{ product.system.name }}</div>
+            <div class="col-xs-6 col-md-6">Console</div>
+            <div class="col-xs-6 col-md-6">{{ product.system.name }}</div>
           </div>
           {% endif %}
           {% if product.editor is not null %}
           <div class="row">
-            <div class="col-md-6">Editeur</div>
-            <div class="col-md-6">{{ product.editor.name }}</div>
+            <div class="col-xs-6 col-md-6">Editeur</div>
+            <div class="col-xs-6 col-md-6">{{ product.editor.name }}</div>
           </div>
           {% endif %}
           {% if note > 0 %}
           <div class="row">
-            <div class="col-md-6">Note</div>
-            <div class="col-md-6">{{ note }} / 5 - {% if nbvote == 1 %} {{ nbvote }} vote {% else %} {{ nbvote }} votes {% endif %}</div>
+            <div class="col-xs-6 col-md-6">Note</div>
+            <div class="col-xs-6 col-md-6">{{ note }} / 5 - {% if nbvote == 1 %} {{ nbvote }} vote {% else %} {{ nbvote }} votes {% endif %}</div>
           </div>
           {% endif %}
           <div class="row">
-            <div class="col-md-6">Prix</div>
-            <div class="col-md-6">{{ product.price }} €</div>
+            <div class="col-xs-6 col-md-6">Prix</div>
+            <div class="col-xs-6 col-md-6">{{ product.price }} €</div>
           </div>
       
         </div>
