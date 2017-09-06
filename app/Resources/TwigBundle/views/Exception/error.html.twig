@@ -1,1 +1,103 @@
-jfjffj
+{# src/OC/CoreBundle/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block metadesc %} {% endblock %}
+    <title>{% block title %}Project Games{% endblock %}</title>
+
+    {% block stylesheets %}
+      {# On charge le CSS de bootstrap depuis le site directement #}
+      <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+      
+    {% endblock %}
+  </head>
+
+  <body>
+  <div class="container">
+    <header>
+      <div class="row">
+       <div class="col-xs-12 col-md-9 col-md-push-3">
+          <div class="logo">
+            {{ render(controller("ThomasGameBundle:Product:setting")) }}
+            <p>
+              Retrouvez vos anciennes consoles et vieux jeux vidéos
+            </p>
+          </div> 
+        </div>
+        <div class="col-xs-12 col-md-3 col-md-pull-9">
+          <div class="connexion">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {# Connecté en tant que <a href="{{ path('fos_user_profile_edit') }}">{{ app.user.username }}</a> #}
+                Connecté en tant que <a href="{{ path('thomas_game_user') }}">{{ app.user.username }}</a>
+                -
+                <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+
+                <p>Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
+            {% endif %}
+            <p>Voir mon <a href="{{ path('thomas_game_cart') }}">panier</a></p>
+          </div> 
+        </div>
+        
+      </div>
+      
+      
+    </header>
+
+    <div class="row">
+        {% block search %}
+        {% endblock %}
+      <div id="menu" class="col-md-3">
+
+        <ul class="nav nav-pills nav-stacked ma-nav">
+          <li class="vert"><a href="{{ path('thomas_game_games', {'page': 1}) }}">Jeux Videos</a></li>
+          <li class="jaune"><a href="{{ path('thomas_game_systems') }}">Consoles</a></li>
+          <li class="bleu"><a href="{{ path('thomas_game_access') }}">Accessoires</a></li>        
+        </ul>
+
+        {% block myfilter %}
+        {% endblock %}
+       
+        
+        <hr>
+        {% if is_granted('ROLE_ADMIN') %}
+          <a href="{{ path('thomas_back_office_orders') }}">Back Office</a>
+        {% endif %}
+
+
+      </div>
+      <div id="content" class="col-md-9">
+        <div class="mycontent">   
+          {% block body %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <footer>
+      <p>Thomas AUJEAN © {{ 'now'|date('Y') }} - 
+        <a href="{{ path('thomas_game_ml') }}">Mentions Légales</a> - 
+        <a href="{{ path('thomas_game_cgv') }}">CGV</a> - 
+        <a href="{{ path('thomas_game_qsn') }}">Qui sommes nous</a>
+      </p>
+    </footer>
+  </div>
+
+  {% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+  {% endblock %}
+
+  </body>
+</html>
