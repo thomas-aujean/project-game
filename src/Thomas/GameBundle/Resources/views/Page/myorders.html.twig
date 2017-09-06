@@ -17,6 +17,7 @@
     <th>Référence</th>
     <th>Date</th>
     <th>Montant</th>
+    <th>Statut de la commande</th>
   </tr>
   {% for order in orders %}
     <tr>
@@ -25,6 +26,7 @@
 
       <td>{{ order.created|date("m/d/Y") }}</td>
       <td>{{ order.amount }} €</td>
+      <td>{{ order.statute.name }}</td>
 
     </tr>
   {% endfor %}

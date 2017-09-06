@@ -28,7 +28,7 @@ class OrderController extends Controller
 
 
         // $listOrders = $repository->findAll();
-        $listOrders = $repository->findBy(array(), array('created' => 'DESC'));
+        $listOrders = $repository->findBy(array('statute' => [1,2]), array('created' => 'DESC'));
 
         return $this->render('ThomasBackOfficeBundle:Order:index.html.twig', array(
             'orders' => $listOrders,

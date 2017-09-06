@@ -67,7 +67,7 @@ class PageController extends Controller
 
 
         $listOrders = $repository->findBy(
-            array('user'=> $user->getId()),
+            array('user'=> $user->getId(), 'statute' => [1,2]),
             ['created' => 'DESC']
         );
 

@@ -17,7 +17,8 @@ class UserController extends Controller
             ->getRepository('ThomasUserBundle:User')
         ;
 
-        $listUsers = $repository->findAll();
+        $listUsers = $repository->findBy(array('enabled' => 1));
+
 
         return $this->render('ThomasBackOfficeBundle:User:index.html.twig', array(
             'users' => $listUsers
@@ -43,7 +44,8 @@ class UserController extends Controller
 
         $user = $repository->find($id);
 
-        $orders = $orderep->findByUser($user->getId());
+        $orders = $orderep->findBy(array('statute' => [1,2], 'user' => $user));
+
         $nb = count($orders);
         $total = 0;
         foreach ($orders as $order){
