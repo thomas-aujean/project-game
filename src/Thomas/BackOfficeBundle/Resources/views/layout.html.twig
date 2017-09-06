@@ -10,6 +10,7 @@
 
     {% block stylesheets %}
       {# On charge le CSS de bootstrap depuis le site directement #}
+      <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -32,18 +33,17 @@
         </div>
         <div class="col-xs-12 col-md-3 col-md-pull-9">
           <div class="connexion">
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                Connecté en tant que <a href="{{ path('fos_user_profile_edit') }}">{{ app.user.username }}</a>
-                -
-                <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
-            {% else %}
-                <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-
-                <p>Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
-            {% endif %}
-            <p>Voir mon <a href="{{ path('thomas_game_cart') }}">panier</a></p>
+            <div class="connexion-info">
+              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                  Connecté en tant que <a href="{{ path('thomas_game_user') }}">{{ app.user.username }}</a><br>                  
+                  <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+              {% else %}
+                  <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+                  <p>Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
+              {% endif %}
+            </div>
           </div> 
-          <h2>BACK OFFICE</h2>
+          <h2 class="bo-title">BACK OFFICE</h2>
         </div>
       </div>
     </header>
@@ -63,7 +63,7 @@
           {% endblock %}
           <hr>
         </ul>
-          <a href="{{ path('thomas_core_home') }}">Retour au site</a>
+          <a href="{{ path('thomas_core_home') }}" class="bo-link">Retour au site</a>
       </div>
       <div id="content" class="col-md-9">
         {% block body %}

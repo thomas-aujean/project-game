@@ -53,20 +53,36 @@ body{
 }
 
 .ma-nav li{
-    margin: 20px 0;
+    margin: 15px 0;
     border-radius: 5px;
     text-align:center;
 }
 
 .ma-nav li a{
     color: white;
-    font-size: 22px
+    font-size: 22px;
+    padding: 20px 0;
 }
 .ma-nav li a:hover{
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
-
-
+.bo-link{
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 14px 0;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+    transition: 0.2s
+}
+.bo-link:hover{
+    background-color: #323232;
+    color: white;
+}
 
                                                 /* HEADER */
 
@@ -86,6 +102,27 @@ header{
     margin: 20px 0;
     padding: 10px;
 }
+
+.connexion-info{
+    width: 100%;
+}
+.cart-link{
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 6px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+    transition: 0.2s;
+}
+.cart-link:hover{
+    background-color: #323232;
+    color: white;
+}
+
 
                                                 /* NOTE */
 
@@ -115,7 +152,6 @@ header{
 .last{
     margin-top: 50px;
 }
-
 
 
                                                 /* FICHE PRODUIT */
@@ -187,9 +223,6 @@ header{
 
                                                 /* PANIER */
 
-.cart{
-
-}
 
 .cart-total{
     text-align: right;

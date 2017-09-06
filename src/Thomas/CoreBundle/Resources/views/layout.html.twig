@@ -32,18 +32,17 @@
         </div>
         <div class="col-xs-12 col-md-3 col-md-pull-9">
           <div class="connexion">
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {# Connecté en tant que <a href="{{ path('fos_user_profile_edit') }}">{{ app.user.username }}</a> #}
-                Connecté en tant que <a href="{{ path('thomas_game_user') }}">{{ app.user.username }}</a>
-                -
-                <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
-            {% else %}
-                <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-
-                <p>Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
-            {% endif %}
-            <p>Voir mon <a href="{{ path('thomas_game_cart') }}">panier</a></p>
+            <div class="connexion-info">
+              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                  Connecté en tant que <a href="{{ path('thomas_game_user') }}">{{ app.user.username }}</a><br>                  
+                  <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+              {% else %}
+                  <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+                  <p>Nouveau ?<a href="{{ path('fos_user_registration_register') }}">Rejoignez-nous !</a></p>
+              {% endif %}
+            </div>
           </div> 
+          <a href="{{ path('thomas_game_cart') }}" class="cart-link">Mon panier</a></p>
         </div>
         
       </div>
@@ -68,7 +67,7 @@
         
         <hr>
         {% if is_granted('ROLE_ADMIN') %}
-          <a href="{{ path('thomas_back_office_orders') }}">Back Office</a>
+          <a class="bo-link" href="{{ path('thomas_back_office_orders') }}">Back Office</a>
         {% endif %}
 
 

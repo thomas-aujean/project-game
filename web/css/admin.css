@@ -1,3 +1,25 @@
 body{
     background-color: rgba(130,130,130,0.2);
 }
+
+.bo-title{
+    text-align: center;
+}
+
+.bo-link{
+    background-color: #323232;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 14px 0;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 600;
+    transition: 0.2s;
+    color: white;
+}
+.bo-link:hover{
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
