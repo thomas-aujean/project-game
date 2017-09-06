@@ -108,21 +108,24 @@ header{
 }
 .cart-link{
     background-color: white;
-    border: 1px solid black;
+    /* border: 1px solid #051C74; */
     display: flex;
     justify-content: center;
     border-radius: 5px;
     padding: 6px 0;
     font-size: 18px;
     font-weight: 600;
-    color: black;
+    color: #051C74;
     transition: 0.2s;
 }
 .cart-link:hover{
-    background-color: #323232;
-    color: white;
+    border: 1px solid #BEBEBE;
+    background-color: #BEBEBE;
+    color: #051C74;
 }
-
+.cart-link >i{
+    margin-left: 10px;
+}
 
                                                 /* NOTE */
 
