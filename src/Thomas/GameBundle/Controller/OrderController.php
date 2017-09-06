@@ -100,7 +100,15 @@ class OrderController extends Controller
         $order->setAmount($total);
         $order->setDetail($orderCart);
         $order->setCoupon($remise);
-        $order->setStatute(1);
+
+        $repository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('ThomasCoreBundle:Statute')
+        ;
+
+        $statute = $repository->find(1);
+
+        $order->setStatute($statute);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($order);
