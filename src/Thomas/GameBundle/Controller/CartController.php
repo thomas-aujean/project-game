@@ -105,8 +105,30 @@ class CartController extends Controller
     public function removeCartAction(Request $request)
     {
 
+        $user = $this->getUser();
+        if ($user != null) {
+
+            $message = (new \Swift_Message('Réduction exceptionnelle'))
+                ->setFrom(['thomas.aujean@gmail.com' => 'Project Games'])
+                ->setTo($user->getEmail())
+                ->setBody('
+                    <h1>Bonjour</h1>
+                    <p>Vous aimez les jeux rétros. Et on trouve ça génial.</p>        
+                    <p>Essayez donc le code promo "petiplus" pour votre prochaine commande.</p>
+                    <p>A très bientôt sur <a href="shop.thomasaujean.com">Project Game</a>.</p>        
+                ' , 'text/html')
+            ;
+            $this->get('mailer')->send($message);
+
+        }
+
         $session = $request->getSession();
         $session->remove('panier');
+
+
+
+
+
 
         return $this->redirect($this->generateUrl('thomas_game_cart'));
     }
