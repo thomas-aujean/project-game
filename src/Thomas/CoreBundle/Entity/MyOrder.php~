@@ -8,14 +8,22 @@ use Doctrine\ORM\Mapping as ORM;
  * MyOrder
  *
  * @ORM\Table(name="my_order")
- * @ORM\Entity(repositoryClass="Thomas\GameBundle\Repository\MyOrderRepository")
+ * @ORM\Entity(repositoryClass="Thomas\CoreBundle\Repository\MyOrderRepository")
  */
 class MyOrder
 {
+
     /**
-     * @ORM\ManyToOne(targetEntity="Thomas\UserBundle\Entity\User", inversedBy="myOrder")
-     */
-     private $user;
+    * @ORM\ManyToOne(targetEntity="Thomas\CoreBundle\Entity\Statute", inversedBy="orders")
+    * @ORM\JoinColumn(name="statute_id", referencedColumnName="id")
+    */
+    private $statute;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="Thomas\UserBundle\Entity\User", inversedBy="myOrder")
+    * @ORM\JoinColumn(name="user_id", referencedColumnName="id") 
+    */
+    private $user;
 
     /**
      * @var int
@@ -164,5 +172,29 @@ class MyOrder
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set coupon
+     *
+     * @param integer $coupon
+     *
+     * @return MyOrder
+     */
+    public function setCoupon($coupon)
+    {
+        $this->coupon = $coupon;
+
+        return $this;
+    }
+
+    /**
+     * Get coupon
+     *
+     * @return integer
+     */
+    public function getCoupon()
+    {
+        return $this->coupon;
     }
 }

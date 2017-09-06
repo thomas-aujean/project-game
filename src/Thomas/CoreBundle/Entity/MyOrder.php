@@ -12,10 +12,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MyOrder
 {
+
     /**
-     * @ORM\ManyToOne(targetEntity="Thomas\UserBundle\Entity\User", inversedBy="myOrder")
-     */
-     private $user;
+    * @ORM\ManyToOne(targetEntity="Thomas\CoreBundle\Entity\Statute", inversedBy="orders")
+    * @ORM\JoinColumn(name="statute_id", referencedColumnName="id")
+    */
+    private $statute;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="Thomas\UserBundle\Entity\User", inversedBy="myOrder")
+    * @ORM\JoinColumn(name="user_id", referencedColumnName="id") 
+    */
+    private $user;
 
     /**
      * @var int
@@ -188,5 +196,29 @@ class MyOrder
     public function getCoupon()
     {
         return $this->coupon;
+    }
+
+    /**
+     * Set statute
+     *
+     * @param \Thomas\CoreBundle\Entity\Statute $statute
+     *
+     * @return MyOrder
+     */
+    public function setStatute(\Thomas\CoreBundle\Entity\Statute $statute = null)
+    {
+        $this->statute = $statute;
+
+        return $this;
+    }
+
+    /**
+     * Get statute
+     *
+     * @return \Thomas\CoreBundle\Entity\Statute
+     */
+    public function getStatute()
+    {
+        return $this->statute;
     }
 }

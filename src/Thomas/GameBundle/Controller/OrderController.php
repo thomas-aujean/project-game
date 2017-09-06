@@ -100,6 +100,7 @@ class OrderController extends Controller
         $order->setAmount($total);
         $order->setDetail($orderCart);
         $order->setCoupon($remise);
+        $order->setStatute(1);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($order);

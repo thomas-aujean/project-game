@@ -20,6 +20,7 @@
     <th>Utilisateur</th> 
     <th>Date</th>
     <th>Montant</th>
+    <th>Statut</th>
   </tr>
   {% for order in orders %}
     <tr>
@@ -31,6 +32,7 @@
 
       <td>{{ order.created|date("d/m/Y") }}</td>
       <td>{{ order.amount }}</td>
+      <td>{{ order.statute.name }}</td>
 
     </tr>
   {% endfor %}
