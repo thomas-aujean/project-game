@@ -177,7 +177,7 @@ class ProductController extends Controller
 
       $request->getSession()->getFlashBag()->add('info', "Le produit a bien été supprimé.");
 
-      return $this->redirectToRoute('thomas_back_office_product_index');
+      return $this->redirectToRoute('thomas_back_office_product_index', ['page'=> 1]);
     }
     
     return $this->render('ThomasBackOfficeBundle:Product:delete.html.twig', array(
