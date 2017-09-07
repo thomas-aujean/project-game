@@ -114,7 +114,7 @@ class CouponController extends Controller
         $form = $this->get('form.factory')->create();
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-        $em->remove($product);
+        $em->remove($coupon);
         $em->flush();
 
         $request->getSession()->getFlashBag()->add('info', "La remise a bien été supprimée.");
