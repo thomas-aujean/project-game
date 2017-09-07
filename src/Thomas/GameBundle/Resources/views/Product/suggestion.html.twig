@@ -1,4 +1,7 @@
+
+{% if listProducts is not null %}
 <h2 class="monh3">Ces produits pourraient vous intéresser</h2>
+
 <div class="row">
 
   {% for product in listProducts %}
@@ -28,3 +31,4 @@
   {% endfor %}
 
 </div>
+{% endif %}
