@@ -98,7 +98,7 @@
 
 
   {% if product.productCategory.id != 2 %}
-  <h2 class="monh3">Ces produits pourraient vous intéresser</h2>
+  
     {{ render(controller("ThomasGameBundle:Product:suggestion", {'filter': product.system.id, 'id' : product.id, 'limit': 3})) }}
   {% else %}
     {# {{ render(controller("ThomasGameBundle:Product:suggestion", {'filter': product.system.id, 'limit': 3})) }} #}
